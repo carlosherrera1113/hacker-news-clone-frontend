@@ -13,9 +13,9 @@ const Link: React.FC<Props> = ({ data }) => {
         {data.feed.links.map((link) => (
           <li key={link.id}>
             {link.description}
-(
+            (
             {link.url}
-)
+            )
           </li>
         ))}
       </div>
