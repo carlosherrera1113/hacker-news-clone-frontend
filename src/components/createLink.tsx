@@ -9,42 +9,49 @@ font-family: sans-serif;
 font-size: 1.3rem;
 color: white;
 background-color: darkorange;
-justify-content: center;
 text-align: center;
-padding: 0.3rem 1rem 0.3rem;
+padding:  0.5rem 3rem 0.5rem 3rem;
 cursor: pointer;
 border-style: none;
+margin: 1rem;
 border-radius: 6.25rem;
 transition: all 0.2s ease-out;
+outline: none;
 &:hover {
     transform: translateY(-1px) scale(1.01);
     background: #ffaa00;
     box-shadow: 0rem 0.75rem 2.5rem rgba(255, 170, 0, 0.25);
 }
+
 `;
 
 const StyledDiv = styled.div`
-width: 50%;
+width: 100%;
 display: flex;
-position: center;
-margin: 3rem;
+position: relative;
 flex-direction: column;
+align-items: center;
 justify-content: center;
 `;
 
 const StyledInput = styled.input`
-padding: 1.2rem 2.5rem;
-background-image: white;
-font-family: inherit;
-font-size: inherit;
+width: 80%;
+padding: 0.75rem 1rem 0.75rem 1rem;
+font-family: sans-serif;
+font-size: 0.9rem;
 border-radius: 6.25rem;
-border: 0.1rem solid rgba(255, 170, 0, 0.25);
+border: 0.2rem solid rgba(255, 170, 0, 0.25);
 margin-top: 1.5rem;
 background-color: transparent;
 transition: all 300ms;
 color: gray;
+text-align: start;
+&:focus {
+    outline: none;
+}
 &::placeholder {
-color: gray;
+    color: gray;
+    text-align: start;
 }
 &:hover {
     transform: translateY(-0.1rem) scale(1.01);
@@ -72,23 +79,21 @@ const CreateLink: React.FC = () => {
   const [postMutation] = usePostMutation({ onCompleted: () => history.push('/') });
 
   return (
-    <div>
-      <StyledDiv>
-        <StyledInput
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          type="text"
-          placeholder="A description for the link."
-        />
-        <StyledInput
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          type="text"
-          placeholder="The URL for the link."
-        />
-      </StyledDiv>
+    <StyledDiv>
+      <StyledInput
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        type="text"
+        placeholder="A description for the link."
+      />
+      <StyledInput
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+        type="text"
+        placeholder="The URL for the link."
+      />
       <StyledButton type="button" onClick={() => postMutation(POST_MUTATION)}>Submit Link</StyledButton>
-    </div>
+    </StyledDiv>
   );
 };
 
