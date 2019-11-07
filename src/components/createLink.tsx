@@ -4,6 +4,15 @@ import { gql } from 'apollo-boost';
 import { useHistory } from 'react-router-dom';
 import { usePostMutation } from '../generated/graphql';
 
+const StyledDiv = styled.div`
+width: 100%;
+display: flex;
+position: relative;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+`;
+
 const StyledButton = styled.button`
 font-family: sans-serif;
 font-size: 1.3rem;
@@ -15,42 +24,35 @@ cursor: pointer;
 border-style: none;
 margin: 1rem;
 border-radius: 6.25rem;
-transition: all 0.2s ease-out;
 outline: none;
+transition: all 0.2s ease-out;
+&:focus {
+    outline: none;
+}
 &:hover {
     transform: translateY(-1px) scale(1.01);
     background: #ffaa00;
     box-shadow: 0rem 0.75rem 2.5rem rgba(255, 170, 0, 0.25);
 }
-
-`;
-
-const StyledDiv = styled.div`
-width: 100%;
-display: flex;
-position: relative;
-flex-direction: column;
-align-items: center;
-justify-content: center;
 `;
 
 const StyledInput = styled.input`
-width: 80%;
+width: 60%;
 padding: 0.75rem 1rem 0.75rem 1rem;
 font-family: sans-serif;
 font-size: 0.9rem;
-border-radius: 6.25rem;
+border-radius: 0.5rem;
 border: 0.2rem solid rgba(255, 170, 0, 0.25);
 margin-top: 1.5rem;
-background-color: transparent;
+background-color: white;
 transition: all 300ms;
-color: gray;
+color: #0F0A0A;
 text-align: start;
 &:focus {
     outline: none;
 }
 &::placeholder {
-    color: gray;
+    color: #BAAFA1;
     text-align: start;
 }
 &:hover {

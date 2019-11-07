@@ -1,22 +1,27 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { createGlobalStyle } from 'styled-components';
 import CreateLink from './components/createLink';
 import LinkContainer from './components/linkContainer';
 import Header from './components/header';
+
+const GlobalStyle = createGlobalStyle`
+body {
+  background-color: white;
+  height: 100%;
+}
+`;
 
 
 const App: React.FC = () => {
   return (
     <Router>
-      <div>
-        <Header />
-        <div>
-          <Switch>
-            <Route exact path="/" component={LinkContainer} />
-            <Route exact path="/create" component={CreateLink} />
-          </Switch>
-        </div>
-      </div>
+      <GlobalStyle />
+      <Header />
+      <Switch>
+        <Route exact path="/" component={LinkContainer} />
+        <Route exact path="/create" component={CreateLink} />
+      </Switch>
     </Router>
   );
 };
