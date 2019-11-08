@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-height: 3.5rem;
+height: 4.5rem;
 width: 100%;
 background-color: white;
 box-shadow: 0rem 0.25rem 1rem grey;
@@ -18,13 +18,24 @@ const Title = styled.div`
 color: darkorange;
 font-size: 2rem;
 font-weight: 200;
-flex-grow: 2;
+flex-grow: 1;
 padding: 1rem;
 `;
 
 const StyledLink = styled(Link)`
-flex-grow: 1;
-padding: 1rem;
+font-size: 1.1rem;
+margin: 3rem;
+cursor: pointer;
+color: darkorange;
+text-decoration: none;
+transition: all 0.2s;
+display: inline-block;
+&:hover {
+  display: inline-block;
+  transform: scale(1.02) translateY(-1px);
+  color: #FFAA00;
+  text-decoration: underline;
+}
 `;
 
 const Header: React.FC = () => {

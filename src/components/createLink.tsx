@@ -52,7 +52,7 @@ text-align: start;
     outline: none;
 }
 &::placeholder {
-    color: #BAAFA1;
+    color: grey;
     text-align: start;
 }
 &:hover {
