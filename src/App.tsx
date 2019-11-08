@@ -6,6 +6,13 @@ import LinkContainer from './components/linkContainer';
 import Header from './components/header';
 
 const GlobalStyle = createGlobalStyle`
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  box-sizing: border-box;
+}
 body {
   background-color: white;
   height: 100%;
