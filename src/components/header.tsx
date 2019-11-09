@@ -29,7 +29,6 @@ cursor: pointer;
 color: darkorange;
 text-decoration: none;
 transition: all 0.2s;
-display: inline-block;
 &:hover {
   display: inline-block;
   transform: scale(1.02) translateY(-1px);
