@@ -4,6 +4,8 @@ import { createGlobalStyle } from 'styled-components';
 import CreateLink from './components/createLink';
 import LinkContainer from './components/linkContainer';
 import Header from './components/header';
+import Login from './components/login';
+import SignUp from './components/signUp';
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -28,6 +30,8 @@ const App: React.FC = () => {
       <Switch>
         <Route exact path="/" component={LinkContainer} />
         <Route exact path="/create" component={CreateLink} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signUp" component={SignUp} />
       </Switch>
     </Router>
   );

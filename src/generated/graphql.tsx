@@ -1,11 +1,7 @@
 import gql from 'graphql-tag';
 import * as ApolloReactCommon from '@apollo/react-common';
-import * as React from 'react';
-import * as ApolloReactComponents from '@apollo/react-components';
-import * as ApolloReactHoc from '@apollo/react-hoc';
 import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string,
@@ -175,23 +171,6 @@ export const PostDocument = gql`
 }
     `;
 export type PostMutationFn = ApolloReactCommon.MutationFunction<PostMutation, PostMutationVariables>;
-export type PostComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<PostMutation, PostMutationVariables>, 'mutation'>;
-
-    export const PostComponent = (props: PostComponentProps) => (
-      <ApolloReactComponents.Mutation<PostMutation, PostMutationVariables> mutation={PostDocument} {...props} />
-    );
-    
-export type PostProps<TChildProps = {}> = ApolloReactHoc.MutateProps<PostMutation, PostMutationVariables> & TChildProps;
-export function withPost<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  PostMutation,
-  PostMutationVariables,
-  PostProps<TChildProps>>) {
-    return ApolloReactHoc.withMutation<TProps, PostMutation, PostMutationVariables, PostProps<TChildProps>>(PostDocument, {
-      alias: 'post',
-      ...operationOptions
-    });
-};
 
 /**
  * __usePostMutation__
@@ -234,23 +213,6 @@ export const EntireFeedDocument = gql`
   }
 }
     `;
-export type EntireFeedComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<EntireFeedQuery, EntireFeedQueryVariables>, 'query'>;
-
-    export const EntireFeedComponent = (props: EntireFeedComponentProps) => (
-      <ApolloReactComponents.Query<EntireFeedQuery, EntireFeedQueryVariables> query={EntireFeedDocument} {...props} />
-    );
-    
-export type EntireFeedProps<TChildProps = {}> = ApolloReactHoc.DataProps<EntireFeedQuery, EntireFeedQueryVariables> & TChildProps;
-export function withEntireFeed<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  EntireFeedQuery,
-  EntireFeedQueryVariables,
-  EntireFeedProps<TChildProps>>) {
-    return ApolloReactHoc.withQuery<TProps, EntireFeedQuery, EntireFeedQueryVariables, EntireFeedProps<TChildProps>>(EntireFeedDocument, {
-      alias: 'entireFeed',
-      ...operationOptions
-    });
-};
 
 /**
  * __useEntireFeedQuery__
