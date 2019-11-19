@@ -19,6 +19,21 @@ margin: 10rem;
 box-shadow: 0rem 0.5rem 3.5rem rgba(0,0,0,0.2);
 `;
 
+const StyledFetch = styled.div`
+display: flex;
+flex-direction: column;
+max-width: 60rem;
+align-items: center;
+justify-content: center;
+background-color: darkorange;
+color: white;
+border-style: none;
+border-radius: 0.7rem;
+padding: 10rem 10rem 10rem 10rem;
+margin: 10rem;
+box-shadow: 0rem 0.5rem 3.5rem rgba(0,0,0,0.2);
+`;
+
 const FEED_QUERY = gql`
 query EntireFeed {
   feed {
@@ -39,7 +54,7 @@ query EntireFeed {
 const LinkContainer: React.FC = () => {
   const { loading, error, data } = useEntireFeedQuery(FEED_QUERY);
 
-  if (loading) return <div>Fetching..</div>;
+  if (loading) return <StyledFetch>Fetching...</StyledFetch>;
 
   if (error || !data) return <StyledError>Error</StyledError>;
 
