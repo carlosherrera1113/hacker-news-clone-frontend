@@ -1,11 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
-import CreateLink from './components/createLink';
-import LinkContainer from './components/linkContainer';
-import Header from './components/header';
-import Login from './components/login';
-import SignUp from './components/signUp';
+import Routes from './components/routes';
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -24,16 +19,10 @@ body {
 
 const App: React.FC = () => {
   return (
-    <Router>
+    <div>
       <GlobalStyle />
-      <Header />
-      <Switch>
-        <Route exact path="/" component={LinkContainer} />
-        <Route exact path="/create" component={CreateLink} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signUp" component={SignUp} />
-      </Switch>
-    </Router>
+      <Routes />
+    </div>
   );
 };
 
