@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const Wrapper = styled.header`
 height: 4.5rem;
 width: 100%;
 background-color: white;
@@ -14,7 +14,8 @@ justify-content: space-evenly;
 align-content: space-around;
 `;
 
-const Title = styled.div`
+const Title = styled(Link)`
+text-decoration: none;
 color: darkorange;
 font-size: 2rem;
 font-weight: 200;
@@ -40,7 +41,7 @@ transition: all 0.2s;
 const Header: React.FC = () => {
   return (
     <Wrapper>
-      <Title>Hacker News</Title>
+      <Title to="/">Hacker News</Title>
       <StyledLink to="/">New Links</StyledLink>
       <StyledLink to="/create">Submit Link</StyledLink>
       <Link to="/login" />
