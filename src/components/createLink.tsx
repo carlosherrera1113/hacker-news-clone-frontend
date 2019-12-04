@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { gql } from 'apollo-boost';
-import { useHistory } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { usePostMutation } from '../generated/graphql';
 
 const StyledDiv = styled.div`
@@ -74,10 +74,9 @@ mutation Post($description: String!, $url: String!) {
   }
 `;
 
-const CreateLink: React.FC = () => {
+const CreateLink: React.FC<RouteComponentProps> = ({ history }) => {
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
-  const history = useHistory();
   const [postMutation] = usePostMutation({ onCompleted: () => history.push('/') });
 
   return (
