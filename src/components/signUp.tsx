@@ -46,6 +46,7 @@ const SignUp: React.FC = () => {
         <input
           type="password"
           placeholder="Password"
+          value={password}
           onChange={(e) => {
             setPassword(e.target.value);
           }}
