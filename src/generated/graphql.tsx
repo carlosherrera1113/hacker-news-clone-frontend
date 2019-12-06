@@ -83,7 +83,6 @@ export type MutationVoteArgs = {
 
 export type Query = {
    __typename?: 'Query',
-  info: Scalars['String'],
   feed: Feed,
 };
 

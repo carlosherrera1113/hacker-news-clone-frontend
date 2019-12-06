@@ -18,20 +18,22 @@ const SignUp: React.FC = () => {
   const history = useHistory();
   const [signUp] = useSignUpMutation(SIGNUP_MUTATION);
 
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+    const response = await signUp({
+      variables: {
+        email,
+        name,
+        password,
+      },
+    });
+    console.log(response);
+    history.push('/');
+  };
+
   return (
     <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        const response = await signUp({
-          variables: {
-            email,
-            name,
-            password,
-          },
-        });
-        console.log(response);
-        history.push('/');
-      }}
+      onSubmit={onSubmit}
     >
       <div>
         <input
