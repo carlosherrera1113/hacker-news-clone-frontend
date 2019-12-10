@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { gql } from 'apollo-boost';
-import { RouteComponentProps } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { usePostMutation } from '../generated/graphql';
 
 const StyledDiv = styled.div`
@@ -64,20 +64,27 @@ text-align: start;
 const POST_MUTATION = gql`
 mutation Post($description: String!, $url: String!) {
     post(description: $description, url: $url) {
-      id
+      url
       postedBy {
           name
       }
-      url
+      id
       description
     }
   }
 `;
 
-const CreateLink: React.FC<RouteComponentProps> = ({ history }) => {
+const CreateLink: React.FC = () => {
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
-  const [postMutation] = usePostMutation({ onCompleted: () => history.push('/') });
+  const history = useHistory();
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
+  const [postMutation] = usePostMutation(POST_MUTATION, { onCompleted: () => history.push('./') });
+
+  const onClick = () => {
+    postMutation();
+  };
 
   return (
     <StyledDiv>
@@ -93,7 +100,7 @@ const CreateLink: React.FC<RouteComponentProps> = ({ history }) => {
         type="text"
         placeholder="The URL for the link."
       />
-      <StyledButton type="button" onClick={() => postMutation(POST_MUTATION)}>Submit Link</StyledButton>
+      <StyledButton type="button" onClick={onClick}>Submit Link</StyledButton>
     </StyledDiv>
   );
 };
