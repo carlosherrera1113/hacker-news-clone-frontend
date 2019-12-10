@@ -126,7 +126,7 @@ export type PostMutation = (
   { __typename?: 'Mutation' }
   & { post: (
     { __typename?: 'Link' }
-    & Pick<Link, 'id' | 'url' | 'description'>
+    & Pick<Link, 'url' | 'id' | 'description'>
     & { postedBy: Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'name'>
@@ -189,11 +189,11 @@ export type SignUpMutation = (
 export const PostDocument = gql`
     mutation Post($description: String!, $url: String!) {
   post(description: $description, url: $url) {
-    id
+    url
     postedBy {
       name
     }
-    url
+    id
     description
   }
 }
