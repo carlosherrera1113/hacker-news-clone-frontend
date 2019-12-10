@@ -18,7 +18,7 @@ const SignUp: React.FC = () => {
   const history = useHistory();
   const [signUp] = useSignUpMutation(SIGNUP_MUTATION);
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     const response = await signUp({
       variables: {
@@ -31,17 +31,27 @@ const SignUp: React.FC = () => {
     history.push('/');
   };
 
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
   return (
     <form
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     >
       <div>
         <input
           value={email}
           placeholder="Email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
+          onChange={handleEmailChange}
         />
       </div>
       <div>
@@ -49,18 +59,14 @@ const SignUp: React.FC = () => {
           type="password"
           placeholder="Password"
           value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
+          onChange={handlePasswordChange}
         />
       </div>
       <div>
         <input
           value={name}
           placeholder="Username"
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
+          onChange={handleNameChange}
         />
       </div>
       <button type="submit">Submit</button>
