@@ -42,10 +42,9 @@ const Header: React.FC = () => {
   return (
     <Wrapper>
       <Title to="/">Hacker News</Title>
-      <StyledLink to="/">New Links</StyledLink>
       <StyledLink to="/create">Submit Link</StyledLink>
-      <Link to="/login" />
-      <Link to="/signUp" />
+      <StyledLink to="/login">Login</StyledLink>
+      <StyledLink to="/signUp">Sign Up</StyledLink>
     </Wrapper>
   );
 };
