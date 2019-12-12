@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+import useForm from 'react-hook-form';
 import { useHistory } from 'react-router';
 import { gql } from 'apollo-boost';
-import { useSignUpMutation } from '../generated/graphql';
+import { useSignUpMutation, MutationSignUpArgs } from '../generated/graphql';
 
 const SIGNUP_MUTATION = gql`
   mutation SignUp($email: String!, $password: String!, $name: String!) {
@@ -12,14 +13,12 @@ const SIGNUP_MUTATION = gql`
 `;
 
 const SignUp: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const { register, handleSubmit } = useForm<MutationSignUpArgs>();
   const history = useHistory();
   const [signUp] = useSignUpMutation(SIGNUP_MUTATION);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
+  const handleSignUp = async (data: MutationSignUpArgs): Promise<void> => {
+    const { email, name, password } = data;
     const response = await signUp({
       variables: {
         email,
@@ -31,42 +30,41 @@ const SignUp: React.FC = () => {
     history.push('/');
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
-
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(handleSignUp)}
     >
       <div>
         <input
-          value={email}
+          name="email"
+          ref={register({
+            required: true,
+            minLength: 5,
+            maxLength: 320,
+          })}
           placeholder="Email"
-          onChange={handleEmailChange}
         />
       </div>
       <div>
         <input
           type="password"
           placeholder="Password"
-          value={password}
-          onChange={handlePasswordChange}
+          name="password"
+          ref={register({
+            required: true,
+            minLength: 8,
+          })}
         />
       </div>
       <div>
         <input
-          value={name}
           placeholder="Username"
-          onChange={handleNameChange}
+          name="name"
+          ref={register({
+            required: true,
+            minLength: 3,
+            maxLength: 36,
+          })}
         />
       </div>
       <button type="submit">Submit</button>
