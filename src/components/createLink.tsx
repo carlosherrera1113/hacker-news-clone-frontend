@@ -4,7 +4,7 @@ import { gql } from 'apollo-boost';
 import { useHistory } from 'react-router-dom';
 import { usePostMutation } from '../generated/graphql';
 
-const StyledDiv = styled.div`
+const Wrapper = styled.div`
 width: 100%;
 display: flex;
 position: relative;
@@ -78,16 +78,14 @@ const CreateLink: React.FC = () => {
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
   const history = useHistory();
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
-  const [postMutation] = usePostMutation(POST_MUTATION, { onCompleted: () => history.push('./') });
+  const [postMutation] = usePostMutation({ onCompleted: () => history.push('./') });
 
   const onClick = () => {
     postMutation();
   };
 
   return (
-    <StyledDiv>
+    <Wrapper>
       <StyledInput
         value={description}
         onChange={(e) => setDescription(e.target.value)}
@@ -101,7 +99,7 @@ const CreateLink: React.FC = () => {
         placeholder="The URL for the link."
       />
       <StyledButton type="button" onClick={onClick}>Submit Link</StyledButton>
-    </StyledDiv>
+    </Wrapper>
   );
 };
 
