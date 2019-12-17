@@ -80,8 +80,8 @@ const CreateLink: React.FC = () => {
   const history = useHistory();
   const [postMutation] = usePostMutation({ onCompleted: () => history.push('./') });
 
-  const onClick = () => {
-    postMutation();
+  const handleClick = () => {
+    postMutation({ variables: { description, url } });
   };
 
   return (
@@ -98,7 +98,7 @@ const CreateLink: React.FC = () => {
         type="text"
         placeholder="The URL for the link."
       />
-      <StyledButton type="button" onClick={onClick}>Submit Link</StyledButton>
+      <StyledButton type="button" onClick={handleClick}>Submit Link</StyledButton>
     </Wrapper>
   );
 };
