@@ -46,14 +46,14 @@ const client = new ApolloClient({
     new TokenRefreshLink({
       accessTokenField: 'accessToken',
       isTokenValidOrUndefined: () => {
-        const accessToken = getAccessToken();
+        const token = getAccessToken();
 
-        if (!accessToken) {
+        if (!token) {
           return true;
         }
 
         try {
-          const { exp } = jwt_decode(accessToken);
+          const { exp } = jwt_decode(token);
           if (Date.now() >= exp * 1000) {
             return false;
           }
