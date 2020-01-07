@@ -9,6 +9,7 @@ export type Scalars = {
   Boolean: boolean,
   Int: number,
   Float: number,
+  DateTime: any,
   /** The `Upload` scalar type represents a file upload. */
   Upload: any,
 };
@@ -25,6 +26,7 @@ export enum CacheControlScope {
   Private = 'PRIVATE'
 }
 
+
 export type Feed = {
    __typename?: 'Feed',
   links: Array<Link>,
@@ -34,6 +36,7 @@ export type Feed = {
 export type Link = {
    __typename?: 'Link',
   id: Scalars['ID'],
+  createdAt: Scalars['DateTime'],
   description: Scalars['String'],
   url: Scalars['String'],
   postedBy?: Maybe<User>,
@@ -126,11 +129,7 @@ export type PostMutation = (
   { __typename?: 'Mutation' }
   & { post: (
     { __typename?: 'Link' }
-    & Pick<Link, 'url' | 'id' | 'description'>
-    & { postedBy: Maybe<(
-      { __typename?: 'User' }
-      & Pick<User, 'name'>
-    )> }
+    & Pick<Link, 'url' | 'createdAt' | 'id' | 'description'>
   ) }
 );
 
@@ -190,9 +189,7 @@ export const PostDocument = gql`
     mutation Post($description: String!, $url: String!) {
   post(description: $description, url: $url) {
     url
-    postedBy {
-      name
-    }
+    createdAt
     id
     description
   }

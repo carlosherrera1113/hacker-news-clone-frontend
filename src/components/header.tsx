@@ -43,8 +43,8 @@ const Header: React.FC = () => {
     <Wrapper>
       <Title to="/">Hacker News</Title>
       <StyledLink to="/create">Submit Link</StyledLink>
-      <StyledLink to="/login">Login</StyledLink>
       <StyledLink to="/signUp">Sign Up</StyledLink>
+      <StyledLink to="/login">Login</StyledLink>
     </Wrapper>
   );
 };

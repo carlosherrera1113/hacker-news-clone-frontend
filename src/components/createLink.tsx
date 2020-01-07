@@ -65,9 +65,7 @@ const POST_MUTATION = gql`
 mutation Post($description: String!, $url: String!) {
     post(description: $description, url: $url) {
       url
-      postedBy {
-          name
-      }
+      createdAt
       id
       description
     }

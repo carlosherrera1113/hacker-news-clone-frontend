@@ -2,37 +2,42 @@ import React from 'react';
 import useForm from 'react-hook-form';
 import { useHistory } from 'react-router';
 import { gql } from 'apollo-boost';
-import { useSignUpMutation, MutationSignUpArgs } from '../generated/graphql';
+import { useLoginMutation, MutationLoginArgs } from '../generated/graphql';
+import { setAccessToken } from '../accessToken';
 
-const SIGNUP_MUTATION = gql`
-  mutation SignUp($email: String!, $password: String!, $name: String!) {
-    signUp(email: $email, password: $password, name: $name) {
+const LOGIN_MUTATION = gql`
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
       token
     }
   }
 `;
 
-const SignUp: React.FC = () => {
-  const { register, handleSubmit } = useForm<MutationSignUpArgs>();
+const Login: React.FC = () => {
+  const { register, handleSubmit } = useForm<MutationLoginArgs>();
   const history = useHistory();
-  const [signUp] = useSignUpMutation();
+  const [login] = useLoginMutation();
 
-  const handleSignUp = async (data: MutationSignUpArgs): Promise<void> => {
-    const { email, name, password } = data;
-    const response = await signUp({
+  const handleLogin = async (data: MutationLoginArgs): Promise<void> => {
+    const { email, password } = data;
+    const response = await login({
       variables: {
         email,
-        name,
         password,
       },
     });
     console.log(response);
+
+    if (response && response.data) {
+      setAccessToken(response.data.login.token);
+    }
+
     history.push('/');
   };
 
   return (
     <form
-      onSubmit={handleSubmit(handleSignUp)}
+      onSubmit={handleSubmit(handleLogin)}
     >
       <div>
         <input
@@ -56,20 +61,9 @@ const SignUp: React.FC = () => {
           })}
         />
       </div>
-      <div>
-        <input
-          placeholder="Username"
-          name="name"
-          ref={register({
-            required: true,
-            minLength: 3,
-            maxLength: 36,
-          })}
-        />
-      </div>
       <button type="submit">Submit</button>
     </form>
   );
 };
 
-export default SignUp;
+export default Login;

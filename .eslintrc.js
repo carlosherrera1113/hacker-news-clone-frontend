@@ -30,7 +30,9 @@ module.exports = {
         'react/jsx-filename-extension': 0,
         'jsx-a11y/anchor-is-valid': 0,
         'import/no-extraneous-dependencies': 0,
-        'react/jsx-one-expression-per-line': 0
+        'react/jsx-one-expression-per-line': 0,
+        'no-shadow': 0,
+        'camelcase': 0,
     },
     settings: {
         react: {
