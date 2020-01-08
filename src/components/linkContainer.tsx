@@ -34,7 +34,7 @@ margin: 10rem;
 box-shadow: 0rem 0.5rem 3.5rem rgba(0,0,0,0.2);
 `;
 
-const FEED_QUERY = gql`
+export const FEED_QUERY = gql`
 query EntireFeed {
   feed {
     links {

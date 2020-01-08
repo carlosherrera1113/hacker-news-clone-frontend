@@ -61,7 +61,7 @@ text-align: start;
 }
 `;
 
-const POST_MUTATION = gql`
+export const POST_MUTATION = gql`
 mutation Post($description: String!, $url: String!) {
     post(description: $description, url: $url) {
       url

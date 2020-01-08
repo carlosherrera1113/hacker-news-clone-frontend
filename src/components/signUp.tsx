@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { gql } from 'apollo-boost';
 import { useSignUpMutation, MutationSignUpArgs } from '../generated/graphql';
 
-const SIGNUP_MUTATION = gql`
+export const SIGNUP_MUTATION = gql`
   mutation SignUp($email: String!, $password: String!, $name: String!) {
     signUp(email: $email, password: $password, name: $name) {
       token

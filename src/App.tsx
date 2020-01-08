@@ -33,7 +33,7 @@ const App: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <div>loading...</div>;
+    return <div>token</div>;
   }
   return (
     <div>

@@ -5,7 +5,7 @@ import { gql } from 'apollo-boost';
 import { useLoginMutation, MutationLoginArgs } from '../generated/graphql';
 import { setAccessToken } from '../accessToken';
 
-const LOGIN_MUTATION = gql`
+export const LOGIN_MUTATION = gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
@@ -26,7 +26,6 @@ const Login: React.FC = () => {
         password,
       },
     });
-    console.log(response);
 
     if (response && response.data) {
       setAccessToken(response.data.login.token);

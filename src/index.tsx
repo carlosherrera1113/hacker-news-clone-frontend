@@ -11,10 +11,9 @@ import jwt_decode from 'jwt-decode';
 import { getAccessToken, setAccessToken } from './accessToken';
 import App from './App';
 
-
 const cache = new InMemoryCache({});
 
-const requestLink = new ApolloLink((operation, forward) => new Observable((observer) => {
+const authLink = new ApolloLink((operation, forward) => new Observable((observer) => {
   let handle: any;
   Promise.resolve(operation)
     .then((operation) => {
@@ -80,7 +79,7 @@ const client = new ApolloClient({
       console.log(graphQLErrors);
       console.log(networkError);
     }),
-    requestLink,
+    authLink,
     new HttpLink({
       uri: 'http://localhost:4000/graphql',
       credentials: 'include',
