@@ -2,8 +2,8 @@ import React from 'react';
 import useForm from 'react-hook-form';
 import { useHistory } from 'react-router';
 import { gql } from 'apollo-boost';
-import { useLoginMutation, MutationLoginArgs } from '../generated/graphql';
-import { setAccessToken } from '../accessToken';
+import { useLoginMutation, MutationLoginArgs } from '../../generated/graphql';
+import { setAccessToken } from '../../utils/accessToken';
 
 export const LOGIN_MUTATION = gql`
   mutation Login($email: String!, $password: String!) {

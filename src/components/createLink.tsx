@@ -17,7 +17,7 @@ const StyledButton = styled.button`
 font-family: sans-serif;
 font-size: 1.3rem;
 color: white;
-background-color: darkorange;
+background-color: ${({ theme }) => theme.colors.primary};
 text-align: center;
 padding:  0.5rem 3rem 0.5rem 3rem;
 cursor: pointer;
@@ -31,7 +31,7 @@ transition: all 0.2s ease-out;
 }
 &:hover {
     transform: translateY(-1px) scale(1.01);
-    background: #ffaa00;
+    background: ${({ theme }) => theme.colors.tertiary};
     box-shadow: 0rem 0.75rem 2.5rem rgba(255, 170, 0, 0.25);
 }
 `;
@@ -44,9 +44,9 @@ font-size: 0.9rem;
 border-radius: 0.5rem;
 border: 0.2rem solid rgba(255, 170, 0, 0.25);
 margin-top: 1.5rem;
-background-color: white;
+background-color: ${({ theme }) => theme.colors.secondary};
 transition: all 300ms;
-color: #0F0A0A;
+color: black;
 text-align: start;
 &:focus {
     outline: none;

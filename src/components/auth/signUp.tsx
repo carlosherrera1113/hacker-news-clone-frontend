@@ -2,7 +2,7 @@ import React from 'react';
 import useForm from 'react-hook-form';
 import { useHistory } from 'react-router';
 import { gql } from 'apollo-boost';
-import { useSignUpMutation, MutationSignUpArgs } from '../generated/graphql';
+import { useSignUpMutation, MutationSignUpArgs } from '../../generated/graphql';
 
 export const SIGNUP_MUTATION = gql`
   mutation SignUp($email: String!, $password: String!, $name: String!) {

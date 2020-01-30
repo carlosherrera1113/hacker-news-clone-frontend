@@ -1,11 +1,11 @@
 import React from 'react';
 import { EntireFeedQuery } from '../generated/graphql';
 
-interface Props {
+interface LinkProps {
     data: EntireFeedQuery;
 }
 
-const Link: React.FC<Props> = ({ data }) => {
+const Link: React.FC<LinkProps> = ({ data }) => {
   return (
     <div>
       <h3>Links</h3>

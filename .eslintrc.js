@@ -24,6 +24,7 @@ module.exports = {
         '@typescript-eslint/no-explicit-any': 0,
         '@typescript-eslint/explicit-function-return-type': 0,
         '@typescript-eslint/no-unused-vars': 0,
+        '@typescript-eslint/no-namespace': 0,
         'object-curly-newline': 0,
         'arrow-body-style': 0,
         'react/prop-types': 0,
@@ -40,8 +41,9 @@ module.exports = {
         },
         "import/resolver": {
             node: {
-                extensions: ['.ts', '.tsx']
-            }
+                extensions: ['.ts', '.tsx', '.js', '.jsx'],
+                paths: ['src']
+            },
         } 
     },
 };

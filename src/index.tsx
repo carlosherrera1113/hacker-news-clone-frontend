@@ -8,6 +8,9 @@ import { onError } from 'apollo-link-error';
 import { ApolloLink, Observable } from 'apollo-link';
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import jwt_decode from 'jwt-decode';
+import { ThemeProvider } from 'styled-components';
+import GlobalStyle from './styles/globalStyles';
+import theme from './styles/theme';
 import { getAccessToken, setAccessToken } from './accessToken';
 import App from './App';
 
@@ -90,7 +93,12 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <>
+        <App />
+        <GlobalStyle />
+      </>
+    </ThemeProvider>
   </ApolloProvider>,
   document.getElementById('root'),
 );
