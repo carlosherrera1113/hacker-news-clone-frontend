@@ -1,12 +1,14 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
- * {
-    margin: 0;
-    padding: 0;
+* {
+    outline: none;
+    box-sizing: inherit;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
 }
 html {
     font-size: 62.5%;
+    box-sizing: border-box;
     @media ${({ theme }) => theme.mediaQueries.largest} {
         font-size: 60%;
     }
@@ -21,11 +23,11 @@ html {
     }
 }
 body {
-  background-color: white;
-  height: 100%;
-  margin: 0;
-  width: 100%;
-  overflow: visible;
+    background-color: white;
+    height: 100%;
+    margin: 0;
+    width: 100%;
+    overflow: visible;
 }
 `;
 

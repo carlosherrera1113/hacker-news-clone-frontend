@@ -6,12 +6,11 @@ import SideDrawer from './sideDrawer';
 
 interface MobileMenuProps {
     menuOpened: boolean;
-    setMenuOpened: any;
+    setMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // eslint-disable-next-line max-len
 const MobileMenu: React.FC<MobileMenuProps> = ({ menuOpened, setMenuOpened }) => {
-  // Animation for the side drawer
   const SideDrawerTransition = useTransition(menuOpened, null, {
     config: config.stiff,
     from: { opacity: 0, transform: 'translateX(-50%)' },

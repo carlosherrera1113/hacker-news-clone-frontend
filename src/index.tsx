@@ -11,7 +11,7 @@ import jwt_decode from 'jwt-decode';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './styles/globalStyles';
 import theme from './styles/theme';
-import { getAccessToken, setAccessToken } from './accessToken';
+import { getAccessToken, setAccessToken } from './utils/accessToken';
 import App from './App';
 
 const cache = new InMemoryCache({});

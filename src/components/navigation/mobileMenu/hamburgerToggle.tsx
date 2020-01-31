@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const StyledLabel = styled.label`
   cursor: pointer;
   position: absolute;
+  overflow: hidden;
   top: 50%;
   right: 0rem;
   transform: translate(-50%, -50%);
@@ -105,7 +106,7 @@ const StyledLabel = styled.label`
 
 interface HamburgerTogglerProps {
     menuOpened: boolean;
-    toggleChange: any;
+    toggleChange: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
 }
 
 const HamburgerToggler: React.FC<HamburgerTogglerProps> = ({ menuOpened, toggleChange }) => {

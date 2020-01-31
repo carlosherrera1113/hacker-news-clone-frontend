@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 import NavItemsContainer from '../navItems/navItemsContainer';
-import useLockBodyScroll from '../../../utils/utils';
+import useLockBodyScroll from '../../../customHooks/useLockBodyScroll';
 
 const BackgroundWrapper = styled(animated.div)`
   position: fixed;

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { animated, useSpring, useTransition, config } from 'react-spring';
+import { animated, useSpring, config } from 'react-spring';
 import DesktopMenu from './desktopMenu';
 import MobileMenu from './mobileMenu/mobileMenu';
+import useMobile from '../../customHooks/useMobile';
 
 const Title = styled.h1`
 margin: 2rem;
@@ -23,7 +24,7 @@ const StyledHeader = styled(animated.header)`
   max-width: 100vw;
   top: 0;
   left: 0;
-  z-index: 15;
+  z-index: 20;
   background: white;
   box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
   transition: --background 0.2s ease-out;
@@ -32,7 +33,7 @@ const StyledHeader = styled(animated.header)`
 const Wrapper = styled.div<any>`
   display: flex;
   align-items: center;
-  overflow-x: hidden;
+  overflow: hidden;
   justify-content: space-between;
   transition: all 0.2s ease-out;
   user-select: none;
@@ -58,7 +59,7 @@ const Contained = styled.div`
 
 
 const NavBar: React.FC = () => {
-  const [isMobile, setMobile] = useState<boolean>(false);
+  const isMobile = useMobile();
   const [menuOpened, setMenuOpened] = useState(false);
 
   const NavBarSpring = useSpring({
@@ -70,19 +71,6 @@ const NavBar: React.FC = () => {
       height: '0rem',
     },
   });
-
-  const changeMobile = () => {
-    // eslint-disable-next-line no-unused-expressions
-    window.matchMedia('(max-width: 37.5em)').matches
-      ? setMobile(true)
-      : setMobile(false);
-  };
-
-  useEffect(() => {
-    changeMobile();
-    window.addEventListener('resize', changeMobile);
-    return () => window.removeEventListener('resize', changeMobile);
-  }, []);
 
   return (
     <StyledHeader style={NavBarSpring}>
