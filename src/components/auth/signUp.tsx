@@ -2,7 +2,9 @@ import React from 'react';
 import useForm from 'react-hook-form';
 import { useHistory } from 'react-router';
 import { gql } from 'apollo-boost';
+import styled from 'styled-components';
 import { useSignUpMutation, MutationSignUpArgs } from '../../generated/graphql';
+import { setAccessToken } from '../../utils/accessToken';
 
 export const SIGNUP_MUTATION = gql`
   mutation SignUp($email: String!, $password: String!, $name: String!) {
@@ -11,6 +13,14 @@ export const SIGNUP_MUTATION = gql`
     }
   }
 `;
+
+const StyledForm = styled.form`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50%;
+`;
+
 
 const SignUp: React.FC = () => {
   const { register, handleSubmit } = useForm<MutationSignUpArgs>();
@@ -26,12 +36,14 @@ const SignUp: React.FC = () => {
         password,
       },
     });
-    console.log(response);
+    if (response && response.data) {
+      setAccessToken(response.data.signUp.token);
+    }
     history.push('/');
   };
 
   return (
-    <form
+    <StyledForm
       onSubmit={handleSubmit(handleSignUp)}
     >
       <div>
@@ -68,7 +80,7 @@ const SignUp: React.FC = () => {
         />
       </div>
       <button type="submit">Submit</button>
-    </form>
+    </StyledForm>
   );
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import useForm from 'react-hook-form';
 import { useHistory } from 'react-router';
 import { gql } from 'apollo-boost';
+import styled from 'styled-components';
 import { useLoginMutation, MutationLoginArgs } from '../../generated/graphql';
 import { setAccessToken } from '../../utils/accessToken';
 
@@ -12,6 +13,14 @@ export const LOGIN_MUTATION = gql`
     }
   }
 `;
+
+const StyledForm = styled.form`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50%;
+`;
+
 
 const Login: React.FC = () => {
   const { register, handleSubmit } = useForm<MutationLoginArgs>();
@@ -26,7 +35,7 @@ const Login: React.FC = () => {
         password,
       },
     });
-
+    // this sets token on global variable
     if (response && response.data) {
       setAccessToken(response.data.login.token);
     }
@@ -35,7 +44,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <form
+    <StyledForm
       onSubmit={handleSubmit(handleLogin)}
     >
       <div>
@@ -61,7 +70,7 @@ const Login: React.FC = () => {
         />
       </div>
       <button type="submit">Submit</button>
-    </form>
+    </StyledForm>
   );
 };
 

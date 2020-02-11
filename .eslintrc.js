@@ -34,6 +34,7 @@ module.exports = {
         'react/jsx-one-expression-per-line': 0,
         'no-shadow': 0,
         'camelcase': 0,
+        'indent': 0,
     },
     settings: {
         react: {

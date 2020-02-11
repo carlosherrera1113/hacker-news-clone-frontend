@@ -10,8 +10,8 @@ const App: React.FC = () => {
       method: 'POST',
       credentials: 'include',
     }).then(async (x) => {
-      const { accessToken } = await x.json();
-      setAccessToken(accessToken);
+      const { refreshToken } = await x.json();
+      setAccessToken(refreshToken);
     });
   }, []);
 
