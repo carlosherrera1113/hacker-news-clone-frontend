@@ -52,7 +52,7 @@ query EntireFeed {
 }`;
 
 const LinkContainer: React.FC = () => {
-  const { loading, error, data } = useEntireFeedQuery(FEED_QUERY);
+  const { loading, error, data } = useEntireFeedQuery();
 
   if (loading) return <StyledFetch>Fetching...</StyledFetch>;
 

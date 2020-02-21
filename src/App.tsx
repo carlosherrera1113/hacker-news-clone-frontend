@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Routes from './components/routes';
 import { setAccessToken } from './utils/accessToken';
 
 const App: React.FC = () => {
+  const [loading, setloading] = useState(true);
   // This allows the global variable 'accessToken' to be refreshed when the user refreshes
   // the page after login
   useEffect(() => {
@@ -10,10 +11,13 @@ const App: React.FC = () => {
       method: 'POST',
       credentials: 'include',
     }).then(async (x) => {
-      const { refreshToken } = await x.json();
-      setAccessToken(refreshToken);
+      const { accessToken } = await x.json();
+      setAccessToken(accessToken);
+      setloading(false);
     });
   }, []);
+
+  if (loading) return <div>Loading...</div>;
 
   return (<Routes />);
 };

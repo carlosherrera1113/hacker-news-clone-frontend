@@ -16,7 +16,7 @@ import App from './App';
 
 const cache = new InMemoryCache({});
 
-const authLink = new ApolloLink((operation, forward) => new Observable((observer) => {
+const requestLink = new ApolloLink((operation, forward) => new Observable((observer) => {
   let handle: any;
   Promise.resolve(operation)
     .then((operation) => {
@@ -82,7 +82,7 @@ const client = new ApolloClient({
       console.log(graphQLErrors);
       console.log(networkError);
     }),
-    authLink,
+    requestLink,
     new HttpLink({
       uri: 'http://localhost:4000/graphql',
       credentials: 'include',

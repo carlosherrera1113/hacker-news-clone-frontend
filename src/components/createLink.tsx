@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { usePostMutation } from '../generated/graphql';
 
 const Wrapper = styled.div`
+margin-top: 50%;
 width: 100%;
 display: flex;
 position: relative;
@@ -76,7 +77,7 @@ const CreateLink: React.FC = () => {
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
   const history = useHistory();
-  const [postMutation] = usePostMutation({ onCompleted: () => history.push('./') });
+  const [postMutation] = usePostMutation({ onCompleted: () => history.push('/') });
 
   const handleClick = () => {
     postMutation({ variables: { description, url } });

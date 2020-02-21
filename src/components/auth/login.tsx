@@ -3,13 +3,17 @@ import useForm from 'react-hook-form';
 import { useHistory } from 'react-router';
 import { gql } from 'apollo-boost';
 import styled from 'styled-components';
-import { useLoginMutation, MutationLoginArgs } from '../../generated/graphql';
+import { useLoginMutation, MutationLoginArgs, MeDocument } from '../../generated/graphql';
 import { setAccessToken } from '../../utils/accessToken';
 
 export const LOGIN_MUTATION = gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
+      user {
+        id
+        email
+      }
     }
   }
 `;
@@ -34,10 +38,22 @@ const Login: React.FC = () => {
         email,
         password,
       },
+      // eslint-disable-next-line consistent-return
+      update: (store, { data }) => {
+        if (!data) {
+          return null;
+        }
+
+        store.writeQuery({
+          query: MeDocument,
+          data: data.login.user,
+        });
+      },
     });
     // this sets token on global variable
     if (response && response.data) {
       setAccessToken(response.data.login.token);
+      console.log(response.data.login.token);
     }
 
     history.push('/');
