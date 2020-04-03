@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { useTrail, animated, config } from 'react-spring';
 import NavItem from './navItem';
 
-const links = ['New Links', 'Submit Link', 'Sign Up', 'Login'];
-const routes = ['/', '/create', '/signUp', '/login'];
+const authenticatedLinks = ['New Links', 'Submit Link', 'Logout'];
+const authenticatedRoutes = ['/', '/create', '/logout'];
 
 interface NavItemsContainerProps {
     mobile: boolean;
@@ -24,8 +24,8 @@ const StyledNav = styled.nav<any>`
   }
 `;
 
-const NavItemsContainer: React.FC<NavItemsContainerProps> = ({ mobile, clicked }) => {
-  const navItemsTrail = useTrail(links.length, {
+const NavItemsContainerAuthenticated: React.FC<NavItemsContainerProps> = ({ mobile, clicked }) => {
+  const navItemsTrail = useTrail(authenticatedLinks.length, {
     config: config.stiff,
     delay: 300,
     opacity: 1,
@@ -35,16 +35,20 @@ const NavItemsContainer: React.FC<NavItemsContainerProps> = ({ mobile, clicked }
       transform: 'translateY(20px)',
     },
   });
-
   return (
     <StyledNav mobile={mobile}>
       {navItemsTrail.map((props, index) => (
-        <animated.div key={links[index]} style={props}>
-          <NavItem key={links[index]} link={links[index]} clicked={clicked} route={routes[index]} />
+        <animated.div key={authenticatedLinks[index]} style={props}>
+          <NavItem
+            key={authenticatedLinks[index]}
+            link={authenticatedLinks[index]}
+            clicked={clicked}
+            route={authenticatedRoutes[index]}
+          />
         </animated.div>
       ))}
     </StyledNav>
   );
 };
 
-export default NavItemsContainer;
+export default NavItemsContainerAuthenticated;

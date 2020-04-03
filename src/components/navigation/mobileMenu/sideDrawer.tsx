@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
-import NavItemsContainer from '../navItems/navItemsContainer';
+import NavAuthentication from '../navItems/navAuthentication';
 import useLockBodyScroll from '../../../customHooks/useLockBodyScroll';
 
 const BackgroundWrapper = styled(animated.div)`
@@ -32,15 +32,20 @@ const Wrapper = styled.div`
 interface SideDrawerProps {
   setMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
   style: any;
+  authenticated: boolean;
 }
 
-const SideDrawer: React.FC<SideDrawerProps> = ({ setMenuOpened, ...rest }) => {
+const SideDrawer: React.FC<SideDrawerProps> = ({ authenticated, setMenuOpened, ...rest }) => {
   useLockBodyScroll();
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <BackgroundWrapper {...rest}>
       <Wrapper>
-        <NavItemsContainer mobile clicked={() => setMenuOpened(false)} />
+        <NavAuthentication
+          mobile
+          authenticated={authenticated}
+          clicked={() => setMenuOpened(false)}
+        />
       </Wrapper>
     </BackgroundWrapper>
   );

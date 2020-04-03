@@ -1,13 +1,14 @@
 import React from 'react';
-import NavItemsContainer from './navItems/navItemsContainer';
+import NavAuthentication from './navItems/navAuthentication';
 
 interface DesktopMenuProps {
     mobile: boolean;
+    authenticated: boolean;
 }
 
-const DesktopMenu: React.FC<DesktopMenuProps> = ({ mobile }) => {
+const DesktopMenu: React.FC<DesktopMenuProps> = ({ mobile, authenticated }) => {
   return (
-    <NavItemsContainer mobile={mobile} />
+    <NavAuthentication mobile={mobile} authenticated={authenticated} />
   );
 };
 
