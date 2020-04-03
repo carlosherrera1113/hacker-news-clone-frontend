@@ -38,22 +38,10 @@ const Login: React.FC = () => {
         email,
         password,
       },
-      // eslint-disable-next-line consistent-return
-      update: (store, { data }) => {
-        if (!data) {
-          return null;
-        }
-
-        store.writeQuery({
-          query: MeDocument,
-          data: data.login.user,
-        });
-      },
     });
     // this sets token on global variable
     if (response && response.data) {
       setAccessToken(response.data.login.token);
-      console.log(response.data.login.token);
     }
 
     history.push('/');

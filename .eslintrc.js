@@ -32,6 +32,7 @@ module.exports = {
         'jsx-a11y/anchor-is-valid': 0,
         'import/no-extraneous-dependencies': 0,
         'react/jsx-one-expression-per-line': 0,
+        'react/no-unescaped-entities': 0,
         'no-shadow': 0,
         'camelcase': 0,
         'indent': 0,
