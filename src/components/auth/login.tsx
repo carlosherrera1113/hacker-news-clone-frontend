@@ -6,6 +6,13 @@ import styled from 'styled-components';
 import { useLoginMutation, MutationLoginArgs } from '../../generated/graphql';
 import { setAccessToken } from '../../utils/accessToken';
 
+const StyledForm = styled.form`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50%;
+`;
+
 export const LOGIN_MUTATION = gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -17,14 +24,6 @@ export const LOGIN_MUTATION = gql`
     }
   }
 `;
-
-const StyledForm = styled.form`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 50%;
-`;
-
 
 const Login: React.FC = () => {
   const { register, handleSubmit } = useForm<MutationLoginArgs>();

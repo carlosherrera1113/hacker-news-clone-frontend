@@ -1,16 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTrail, animated, config } from 'react-spring';
+
 import NavItem from './navItem';
-
-const links = ['New Links', 'Submit Link', 'Sign Up', 'Login'];
-const routes = ['/', '/create', '/signUp', '/login'];
-
-interface NavItemsContainerProps {
-    mobile: boolean;
-    clicked?: () => void;
-}
-
 
 const StyledNav = styled.nav<any>`
   display: flex;
@@ -23,6 +15,15 @@ const StyledNav = styled.nav<any>`
     margin-right: ${({ mobile }) => (mobile ? '0rem' : '4rem')};
   }
 `;
+
+interface NavItemsContainerProps {
+    mobile: boolean;
+    clicked?: () => void;
+}
+
+const links = ['New Links', 'Submit Link', 'Sign Up', 'Login'];
+const routes = ['/', '/create', '/signUp', '/login'];
+
 
 const NavItemsContainer: React.FC<NavItemsContainerProps> = ({ mobile, clicked }) => {
   const navItemsTrail = useTrail(links.length, {
@@ -40,7 +41,12 @@ const NavItemsContainer: React.FC<NavItemsContainerProps> = ({ mobile, clicked }
     <StyledNav mobile={mobile}>
       {navItemsTrail.map((props, index) => (
         <animated.div key={links[index]} style={props}>
-          <NavItem key={links[index]} link={links[index]} clicked={clicked} route={routes[index]} />
+          <NavItem
+            key={links[index]}
+            link={links[index]}
+            clicked={clicked}
+            route={routes[index]}
+          />
         </animated.div>
       ))}
     </StyledNav>

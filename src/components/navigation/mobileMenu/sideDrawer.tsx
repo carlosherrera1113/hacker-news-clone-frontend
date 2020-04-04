@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
+
 import NavAuthentication from '../navItems/navAuthentication';
 import useLockBodyScroll from '../../../customHooks/useLockBodyScroll';
 

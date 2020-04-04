@@ -6,14 +6,6 @@ import styled from 'styled-components';
 import { useSignUpMutation, MutationSignUpArgs } from '../../generated/graphql';
 import { setAccessToken } from '../../utils/accessToken';
 
-export const SIGNUP_MUTATION = gql`
-  mutation SignUp($email: String!, $password: String!, $name: String!) {
-    signUp(email: $email, password: $password, name: $name) {
-      token
-    }
-  }
-`;
-
 const StyledForm = styled.form`
   display: flex;
   align-items: center;
@@ -21,6 +13,13 @@ const StyledForm = styled.form`
   margin-top: 50%;
 `;
 
+export const SIGNUP_MUTATION = gql`
+  mutation SignUp($email: String!, $password: String!, $name: String!) {
+    signUp(email: $email, password: $password, name: $name) {
+      token
+    }
+  }
+`;
 
 const SignUp: React.FC = () => {
   const { register, handleSubmit } = useForm<MutationSignUpArgs>();
