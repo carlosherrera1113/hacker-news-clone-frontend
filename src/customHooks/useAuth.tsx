@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { gql } from 'apollo-boost';
 
 import { useMeQuery } from '../generated/graphql';
@@ -18,13 +18,6 @@ const useAuth = () => {
   if (data && isAuthenticated === false) {
     setAuthenticated(true);
   }
-
-  const reloadPage = () => window.location.reload(false);
-
-  useEffect(() => {
-    window.addEventListener('isAuthenticated', reloadPage);
-    return () => window.removeEventListener('isAuthenticated', reloadPage);
-  }, []);
 
   return isAuthenticated;
 };
