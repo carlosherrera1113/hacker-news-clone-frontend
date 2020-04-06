@@ -21,8 +21,8 @@ interface NavItemsContainerProps {
     clicked?: () => void;
 }
 
-const links = ['New Links', 'Submit Link', 'Sign Up', 'Login'];
-const routes = ['/', '/create', '/signUp', '/login'];
+const links = ['New Links', 'Sign Up', 'Login'];
+const routes = ['/', '/signUp', '/login'];
 
 
 const NavItemsContainer: React.FC<NavItemsContainerProps> = ({ mobile, clicked }) => {
