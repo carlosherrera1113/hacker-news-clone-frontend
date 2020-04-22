@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { gql } from 'apollo-boost';
 import { useHistory } from 'react-router-dom';
+
 import { usePostMutation } from '../generated/graphql';
+import useAuth from '../customHooks/useAuth';
 
 const Wrapper = styled.div`
 margin-top: 50%;
@@ -78,6 +80,7 @@ const CreateLink: React.FC = () => {
   const [url, setUrl] = useState('');
   const history = useHistory();
   const [postMutation] = usePostMutation({ onCompleted: () => history.push('/') });
+  const { isAuthenticated } = useAuth();
 
   const handleClick = () => {
     postMutation({ variables: { description, url } });

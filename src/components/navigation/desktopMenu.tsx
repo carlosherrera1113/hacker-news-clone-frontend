@@ -4,12 +4,11 @@ import NavAuthentication from './navItems/navAuthentication';
 
 interface DesktopMenuProps {
     mobile: boolean;
-    authenticated: boolean;
 }
 
-const DesktopMenu: React.FC<DesktopMenuProps> = ({ mobile, authenticated }) => {
+const DesktopMenu: React.FC<DesktopMenuProps> = ({ mobile }) => {
   return (
-    <NavAuthentication mobile={mobile} authenticated={authenticated} />
+    <NavAuthentication mobile={mobile} />
   );
 };
 

@@ -25,6 +25,7 @@ module.exports = {
         '@typescript-eslint/explicit-function-return-type': 0,
         '@typescript-eslint/no-unused-vars': 0,
         '@typescript-eslint/no-namespace': 0,
+        '@typescript-eslint/no-non-null-assertion': 0,
         'object-curly-newline': 0,
         'arrow-body-style': 0,
         'react/prop-types': 0,
@@ -35,6 +36,7 @@ module.exports = {
         'react/no-unescaped-entities': 0,
         'no-shadow': 0,
         'camelcase': 0,
+        'import/extensions': 0,
     },
     settings: {
         react: {

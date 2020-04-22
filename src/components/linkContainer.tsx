@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { gql } from 'apollo-boost';
+
 import { useEntireFeedQuery } from '../generated/graphql';
 import Link from './link';
 import useAuth from '../customHooks/useAuth';
@@ -55,20 +56,14 @@ query EntireFeed {
 
 const LinkContainer: React.FC = () => {
   const { loading, error, data } = useEntireFeedQuery();
-  const isAuthenticated = useAuth();
+  const { isAuthenticated } = useAuth();
 
   if (loading) return <StyledFetch>Fetching...</StyledFetch>;
 
   if (error || !data) return <StyledError>Error</StyledError>;
 
   return (
-    <>
-      <div>{ isAuthenticated
-        ? (<div>Your'e logged in</div>)
-        : (<div>You need to log in!</div>)}
-      </div>
-      <Link data={data} />
-    </>
+    <Link data={data} />
   );
 };
 

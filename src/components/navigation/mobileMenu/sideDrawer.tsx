@@ -33,10 +33,9 @@ const Wrapper = styled.div`
 interface SideDrawerProps {
   setMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
   style: any;
-  authenticated: boolean;
 }
 
-const SideDrawer: React.FC<SideDrawerProps> = ({ authenticated, setMenuOpened, ...rest }) => {
+const SideDrawer: React.FC<SideDrawerProps> = ({ setMenuOpened, ...rest }) => {
   useLockBodyScroll();
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
@@ -44,7 +43,6 @@ const SideDrawer: React.FC<SideDrawerProps> = ({ authenticated, setMenuOpened, .
       <Wrapper>
         <NavAuthentication
           mobile
-          authenticated={authenticated}
           clicked={() => setMenuOpened(false)}
         />
       </Wrapper>

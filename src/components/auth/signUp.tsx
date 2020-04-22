@@ -3,6 +3,7 @@ import useForm from 'react-hook-form';
 import { useHistory } from 'react-router';
 import { gql } from 'apollo-boost';
 import styled from 'styled-components';
+
 import { useSignUpMutation, MutationSignUpArgs } from '../../generated/graphql';
 import { setAccessToken } from '../../utils/accessToken';
 

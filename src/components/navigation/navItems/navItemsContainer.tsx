@@ -19,13 +19,15 @@ const StyledNav = styled.nav<any>`
 interface NavItemsContainerProps {
     mobile: boolean;
     clicked?: () => void;
+    authenticated: boolean | null;
 }
 
 const links = ['New Links', 'Sign Up', 'Login'];
 const routes = ['/', '/signUp', '/login'];
 
 
-const NavItemsContainer: React.FC<NavItemsContainerProps> = ({ mobile, clicked }) => {
+// eslint-disable-next-line max-len
+const NavItemsContainer: React.FC<NavItemsContainerProps> = ({ mobile, clicked, authenticated }) => {
   const navItemsTrail = useTrail(links.length, {
     config: config.stiff,
     delay: 300,
@@ -38,7 +40,7 @@ const NavItemsContainer: React.FC<NavItemsContainerProps> = ({ mobile, clicked }
   });
 
   return (
-    <StyledNav mobile={mobile}>
+    <StyledNav mobile={mobile} authenticated={authenticated}>
       {navItemsTrail.map((props, index) => (
         <animated.div key={links[index]} style={props}>
           <NavItem

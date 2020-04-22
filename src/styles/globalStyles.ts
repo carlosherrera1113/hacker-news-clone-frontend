@@ -4,7 +4,6 @@ const GlobalStyle = createGlobalStyle`
 * {
     outline: none;
     box-sizing: inherit;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
 }
 html {
     font-size: 62.5%;

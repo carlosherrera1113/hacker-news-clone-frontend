@@ -5,7 +5,6 @@ import { animated, useSpring, config } from 'react-spring';
 import DesktopMenu from './desktopMenu';
 import MobileMenu from './mobileMenu/mobileMenu';
 import useMobile from '../../customHooks/useMobile';
-import useAuth from '../../customHooks/useAuth';
 
 const Title = styled.h1`
 margin: 2rem;
@@ -61,7 +60,6 @@ const Contained = styled.div`
 
 const NavBar: React.FC = () => {
   const isMobile = useMobile();
-  const isAuthenticated = useAuth();
   const [menuOpened, setMenuOpened] = useState(false);
 
   const NavBarSpring = useSpring({
@@ -79,18 +77,18 @@ const NavBar: React.FC = () => {
       <Contained>
         <Wrapper isMobile={isMobile}>
           <Title>Hacker News Clone</Title>
-          {isMobile ? (
-            <MobileMenu
-              authenticated={isAuthenticated}
-              menuOpened={menuOpened}
-              setMenuOpened={setMenuOpened}
-            />
-          ) : (
-            <DesktopMenu
-              mobile={isMobile}
-              authenticated={isAuthenticated}
-            />
-          )}
+          {isMobile
+            ? (
+              <MobileMenu
+                menuOpened={menuOpened}
+                setMenuOpened={setMenuOpened}
+              />
+            )
+            : (
+              <DesktopMenu
+                mobile={isMobile}
+              />
+            )}
         </Wrapper>
       </Contained>
     </StyledHeader>

@@ -3,6 +3,7 @@ import useForm from 'react-hook-form';
 import { useHistory } from 'react-router';
 import { gql } from 'apollo-boost';
 import styled from 'styled-components';
+
 import { useLoginMutation, MutationLoginArgs } from '../../generated/graphql';
 import { setAccessToken } from '../../utils/accessToken';
 
@@ -20,6 +21,7 @@ export const LOGIN_MUTATION = gql`
       user {
         id
         email
+        name
       }
     }
   }
@@ -42,7 +44,7 @@ const Login: React.FC = () => {
     if (response && response.data) {
       setAccessToken(response.data.login.token);
     }
-    history.push('/');
+    history.push('/create');
   };
 
   return (

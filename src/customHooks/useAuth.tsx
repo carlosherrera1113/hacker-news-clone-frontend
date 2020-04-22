@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { gql } from 'apollo-boost';
 
 import { useMeQuery } from '../generated/graphql';
@@ -12,13 +12,16 @@ query Me {
 
 const useAuth = () => {
   const [isAuthenticated, setAuthenticated] = useState(false);
-  const { data } = useMeQuery();
+  const { loading, error, data, refetch, client } = useMeQuery({ fetchPolicy: 'network-only' });
+  const me = data ? data.me : null;
 
-  if (data && isAuthenticated === false) {
-    setAuthenticated(true);
-  }
+  useEffect(() => {
+    if (data && !isAuthenticated) {
+      setAuthenticated(true);
+    }
+  }, [data]);
 
-  return isAuthenticated;
+  return { isAuthenticated, setAuthenticated, loading, error, data, refetch, me, client };
 };
 
 export default useAuth;

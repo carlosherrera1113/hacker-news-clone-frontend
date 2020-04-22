@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useTrail, animated, config } from 'react-spring';
 
 import NavItem from './navItem';
+import Logout from '../../auth/logout';
 
 const StyledNav = styled.nav<any>`
   display: flex;
@@ -19,12 +20,14 @@ const StyledNav = styled.nav<any>`
 interface NavItemsContainerProps {
     mobile: boolean;
     clicked?: () => void;
+    authenticated: boolean | null;
 }
 
-const authenticatedLinks = ['New Links', 'Submit Link', 'Logout'];
-const authenticatedRoutes = ['/', '/create', '/logout'];
+const authenticatedLinks = ['New Links', 'Submit Link'];
+const authenticatedRoutes = ['/', '/create'];
 
-const NavItemsContainerAuthenticated: React.FC<NavItemsContainerProps> = ({ mobile, clicked }) => {
+// eslint-disable-next-line max-len
+const NavItemsContainerAuthenticated: React.FC<NavItemsContainerProps> = ({ mobile, clicked, authenticated }) => {
   const navItemsTrail = useTrail(authenticatedLinks.length, {
     config: config.stiff,
     delay: 300,
@@ -36,7 +39,7 @@ const NavItemsContainerAuthenticated: React.FC<NavItemsContainerProps> = ({ mobi
     },
   });
   return (
-    <StyledNav mobile={mobile}>
+    <StyledNav mobile={mobile} authenticated={authenticated}>
       {navItemsTrail.map((props, index) => (
         <animated.div key={authenticatedLinks[index]} style={props}>
           <NavItem
