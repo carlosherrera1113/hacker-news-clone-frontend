@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { gql } from 'apollo-boost';
 import styled from 'styled-components';
 
-import { useLoginMutation, MutationLoginArgs } from '../../generated/graphql';
+import { useLoginMutation, MutationLoginArgs, MeQuery, MeDocument } from '../../generated/graphql';
 import { setAccessToken } from '../../utils/accessToken';
 
 const StyledForm = styled.form`
@@ -39,6 +39,17 @@ const Login: React.FC = () => {
         email,
         password,
       },
+      // eslint-disable-next-line consistent-return
+      update: (cache, { data }) => {
+        if (!data) return null;
+
+        cache.writeQuery<MeQuery>({
+          query: MeDocument,
+          data: {
+            me: data.login.user,
+          },
+        });
+      },
     });
     // this sets token on global variable
     if (response && response.data) {
@@ -48,9 +59,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <StyledForm
-      onSubmit={handleSubmit(handleLogin)}
-    >
+    <StyledForm onSubmit={handleSubmit(handleLogin)}>
       <div>
         <input
           name="email"
