@@ -56,7 +56,6 @@ query EntireFeed {
 
 const LinkContainer: React.FC = () => {
   const { loading, error, data } = useEntireFeedQuery();
-  const { isAuthenticated } = useAuth();
 
   if (loading) return <StyledFetch>Fetching...</StyledFetch>;
 

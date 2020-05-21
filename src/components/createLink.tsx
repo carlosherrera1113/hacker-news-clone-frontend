@@ -80,7 +80,6 @@ const CreateLink: React.FC = () => {
   const [url, setUrl] = useState('');
   const history = useHistory();
   const [postMutation] = usePostMutation({ onCompleted: () => history.push('/') });
-  const { isAuthenticated } = useAuth();
 
   const handleClick = () => {
     postMutation({ variables: { description, url } });

@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import NavItemsContainerAuthenticated from './navItemsContainerAuthenticated';
 import NavItemsContainer from './navItemsContainer';
-import useAuth from '../../../customHooks/useAuth';
-import { useLogoutMutation } from '../../../generated/graphql';
+import { useLogoutMutation, useMeQuery } from '../../../generated/graphql';
 import { setAccessToken } from '../../../utils/accessToken';
 
 const StyledButton = styled.button`
@@ -44,30 +43,36 @@ export const LOGOUT_MUTATION = gql`
       }
   }
 `;
+
+export const ME_QUERY = gql`
+query Me {
+  me {
+    name
+  }
+}`;
+
 // eslint-disable-next-line max-len
 const NavAuthentication: React.FC<NavAuthenticationProps> = ({ mobile, clicked }) => {
+  const { loading, data } = useMeQuery();
   const [logout, { client }] = useLogoutMutation();
-  const { isAuthenticated, setAuthenticated } = useAuth();
   const history = useHistory();
 
   const handleLogout = async () => {
     await logout();
     setAccessToken('');
-    await client!.clearStore();
+    await client!.resetStore();
     history.push('/');
-    setAuthenticated(false);
   };
 
   return (
-    <>
-      { isAuthenticated
+    <div>
+      { !loading && data && data.me
         ? (
           <>
             <StyledButton onClick={handleLogout} type="button">Logout</StyledButton>
             <NavItemsContainerAuthenticated
               mobile={mobile}
               clicked={clicked}
-              authenticated={isAuthenticated}
             />
           </>
         )
@@ -75,10 +80,9 @@ const NavAuthentication: React.FC<NavAuthenticationProps> = ({ mobile, clicked }
           <NavItemsContainer
             mobile={mobile}
             clicked={clicked}
-            authenticated={isAuthenticated}
           />
         )}
-    </>
+    </div>
   );
 };
 
