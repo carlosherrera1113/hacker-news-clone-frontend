@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import gql from 'graphql-tag';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';

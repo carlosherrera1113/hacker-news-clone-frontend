@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useTrail, animated, config } from 'react-spring';
 
 import NavItem from './navItem';
-import { MeQuery } from '../../../generated/graphql';
 
 const StyledNav = styled.nav<any>`
   display: flex;

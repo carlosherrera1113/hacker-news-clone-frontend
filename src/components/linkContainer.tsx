@@ -4,8 +4,6 @@ import { gql } from 'apollo-boost';
 
 import { useEntireFeedQuery } from '../generated/graphql';
 import Link from './link';
-import useAuth from '../customHooks/useAuth';
-
 
 const StyledError = styled.div`
 display: flex;

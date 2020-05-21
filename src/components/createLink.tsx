@@ -4,7 +4,6 @@ import { gql } from 'apollo-boost';
 import { useHistory } from 'react-router-dom';
 
 import { usePostMutation } from '../generated/graphql';
-import useAuth from '../customHooks/useAuth';
 
 const Wrapper = styled.div`
 margin-top: 50%;
