@@ -6,25 +6,40 @@ import { useHistory } from 'react-router-dom';
 import { usePostMutation } from '../generated/graphql';
 
 const Wrapper = styled.div`
-margin-top: 20%;
+max-width: 70rem;
+align-items: center;
+padding: 8rem;
 width: 100%;
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+border-radius: 2rem;
+margin: 0 auto;
+background-color: ${({ theme }) => theme.colors.secondary};
+`;
+
+const StyledForm = styled.form`
 display: flex;
-position: relative;
 flex-direction: column;
 align-items: center;
-justify-content: center;
+`;
+
+const StyledHeading = styled.h1`
+font-family: sans-serif;
+margin: inherit;
+font-weight: 700;
+font-size: 2.75rem;
+color: grey;
 `;
 
 const StyledButton = styled.button`
 font-family: sans-serif;
-font-size: 1.3rem;
+font-size: 1.4rem;
 color: white;
 background-color: ${({ theme }) => theme.colors.primary};
 text-align: center;
 padding:  0.5rem 3rem 0.5rem 3rem;
 cursor: pointer;
 border-style: none;
-margin: 1rem;
+margin: 10%;
 border-radius: 6.25rem;
 outline: none;
 transition: all 0.2s ease-out;
@@ -39,16 +54,16 @@ transition: all 0.2s ease-out;
 `;
 
 const StyledInput = styled.input`
-width: 60%;
+width: 100%;
 padding: 0.75rem 1rem 0.75rem 1rem;
 font-family: sans-serif;
-font-size: 0.9rem;
+font-size: 1.4rem;
 border-radius: 0.5rem;
 border: 0.2rem solid rgba(255, 170, 0, 0.25);
-margin-top: 1.5rem;
+margin-top: 3.5rem;
 background-color: ${({ theme }) => theme.colors.secondary};
 transition: all 300ms;
-color: black;
+color: grey;
 text-align: start;
 &:focus {
     outline: none;
@@ -86,19 +101,22 @@ const CreateLink: React.FC = () => {
 
   return (
     <Wrapper>
-      <StyledInput
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        type="text"
-        placeholder="A description for the link."
-      />
-      <StyledInput
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        type="text"
-        placeholder="The URL for the link."
-      />
-      <StyledButton type="button" onClick={handleClick}>Submit Link</StyledButton>
+      <StyledForm>
+        <StyledHeading>Sumbit Link</StyledHeading>
+        <StyledInput
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          type="text"
+          placeholder="A description for the link."
+        />
+        <StyledInput
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          type="text"
+          placeholder="The URL for the link."
+        />
+        <StyledButton type="button" onClick={handleClick}>Submit Link</StyledButton>
+      </StyledForm>
     </Wrapper>
   );
 };
