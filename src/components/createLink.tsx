@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { usePostMutation } from '../generated/graphql';
 
 const Wrapper = styled.div`
-margin-top: 50%;
+margin-top: 20%;
 width: 100%;
 display: flex;
 position: relative;

@@ -29,7 +29,7 @@ const routes = ['/', '/signUp', '/login'];
 const NavItemsContainer: React.FC<NavItemsContainerProps> = ({ mobile, clicked }) => {
   const navItemsTrail = useTrail(links.length, {
     config: config.stiff,
-    delay: 300,
+    delay: 350,
     opacity: 1,
     transform: 'translateY(0px)',
     from: {

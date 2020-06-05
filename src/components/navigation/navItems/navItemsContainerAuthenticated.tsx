@@ -28,7 +28,7 @@ const authenticatedRoutes = ['/', '/create'];
 const NavItemsContainerAuthenticated: React.FC<NavItemsContainerProps> = ({ mobile, clicked }) => {
   const navItemsTrail = useTrail(authenticatedLinks.length, {
     config: config.stiff,
-    delay: 300,
+    delay: 350,
     opacity: 1,
     transform: 'translateY(0px)',
     from: {

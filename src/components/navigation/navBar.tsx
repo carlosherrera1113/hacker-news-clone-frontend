@@ -7,15 +7,22 @@ import MobileMenu from './mobileMenu/mobileMenu';
 import useMobile from '../../customHooks/useMobile';
 
 const Title = styled.h1`
-margin: 2rem;
+display: inline;
+margin: 1.5rem;
 color: darkorange;
-font-size: 3.5rem;
+font-size: 3.75rem;
 font-weight: 500;
+@media ${({ theme }) => theme.mediaQueries.medium} {
+  font-size: 3.5rem;
+  }
 @media ${({ theme }) => theme.mediaQueries.small} {
+  font-size: 3.25rem;
+  }
+@media ${({ theme }) => theme.mediaQueries.smaller} {
   font-size: 3rem;
   }
 @media ${({ theme }) => theme.mediaQueries.smallest} {
-  font-size: 2.5rem;
+  font-size: 2.75rem;
   }
 `;
 
