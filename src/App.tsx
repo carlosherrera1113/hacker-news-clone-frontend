@@ -17,7 +17,7 @@ const App: React.FC = () => {
     });
   }, []);
 
-  if (loading) return <div>Loading</div>;
+  if (loading) return null;
 
   return (<Routes />);
 };

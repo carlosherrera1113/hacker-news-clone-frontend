@@ -127,7 +127,7 @@ const Login: React.FC = () => {
   return (
     <FormWrapper>
       <StyledForm onSubmit={handleSubmit(handleLogin)}>
-        <StyledHeading>Sign In</StyledHeading>
+        <StyledHeading>Log into Hacker News Clone</StyledHeading>
         <StyledInput
           name="email"
           ref={register({

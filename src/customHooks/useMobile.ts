@@ -5,7 +5,7 @@ const useMobile = () => {
 
   const changeMobile = () => {
     // eslint-disable-next-line no-unused-expressions
-    window.matchMedia('(max-width: 52em)').matches
+    window.matchMedia('(max-width: 45em)').matches
       ? setMobile(true)
       : setMobile(false);
   };

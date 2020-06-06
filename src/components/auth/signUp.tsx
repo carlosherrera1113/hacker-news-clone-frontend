@@ -112,7 +112,7 @@ const SignUp: React.FC = () => {
   return (
     <FormWrapper>
       <StyledForm onSubmit={handleSubmit(handleSignUp)}>
-        <StyledHeading>Sign Up</StyledHeading>
+        <StyledHeading>Create an Account</StyledHeading>
         <StyledInput
           name="email"
           ref={register({

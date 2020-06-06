@@ -22,7 +22,7 @@ html {
     }
 }
 body {
-    background-color: white;
+    background-color: #f5f5f5;
     height: 100%;
     margin: 0;
     width: 100%;
