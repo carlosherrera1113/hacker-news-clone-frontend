@@ -102,7 +102,7 @@ const CreateLink: React.FC = () => {
   return (
     <Wrapper>
       <StyledForm>
-        <StyledHeading>Sumbit Link</StyledHeading>
+        <StyledHeading>Submit Link</StyledHeading>
         <StyledInput
           value={description}
           onChange={(e) => setDescription(e.target.value)}
