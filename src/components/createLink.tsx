@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { gql } from 'apollo-boost';
 import { useHistory } from 'react-router-dom';
 
-import { usePostMutation } from '../generated/graphql';
+import { usePostMutation, EntireFeedQuery, EntireFeedDocument } from '../generated/graphql';
 
 const Wrapper = styled.div`
 max-width: 70rem;
@@ -81,12 +81,12 @@ text-align: start;
 export const POST_MUTATION = gql`
 mutation Post($description: String!, $url: String!) {
     post(description: $description, url: $url) {
-      url
-      createdAt
       id
       description
+      createdAt
+      url
     }
-  }
+}
 `;
 
 const CreateLink: React.FC = () => {
@@ -96,7 +96,23 @@ const CreateLink: React.FC = () => {
   const [postMutation] = usePostMutation({ onCompleted: () => history.push('/') });
 
   const handleClick = () => {
-    postMutation({ variables: { description, url } });
+    postMutation({
+      variables: {
+        description,
+        url,
+      },
+      update: (cache, { data }) => {
+        const query = cache.readQuery<EntireFeedQuery>({ query: EntireFeedDocument });
+
+        // eslint-disable-next-line no-unused-expressions
+        query!.feed.links.unshift(data!.post);
+
+        cache.writeQuery({
+          query: EntireFeedDocument,
+          data,
+        });
+      },
+    });
   };
 
   return (

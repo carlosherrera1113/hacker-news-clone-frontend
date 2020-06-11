@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { gql } from 'apollo-boost';
 
 import { useEntireFeedQuery } from '../generated/graphql';
-import Link from './link';
+import Links from './link';
 import Spinner from './spinner';
 
 const StyledError = styled.div`
@@ -27,10 +27,16 @@ query EntireFeed {
     links {
       id
       description
+      createdAt
       url
+      postedBy {
+        id
+        name
+      }
       votes {
+        id
         user {
-          name
+          id
         }
       }
     }
@@ -46,7 +52,7 @@ const LinkContainer: React.FC = () => {
   if (error || !data) return <StyledError>Error</StyledError>;
 
   return (
-    <Link data={data} />
+    <Links linkData={data} />
   );
 };
 
