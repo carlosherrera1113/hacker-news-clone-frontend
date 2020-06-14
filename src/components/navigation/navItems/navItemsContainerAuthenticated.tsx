@@ -21,8 +21,8 @@ interface NavItemsContainerProps {
     clicked?: () => void;
 }
 
-const authenticatedLinks = ['New Links', 'Submit Link'];
-const authenticatedRoutes = ['/', '/create'];
+const authenticatedLinks = ['New Links', 'Submit Link', 'Search'];
+const authenticatedRoutes = ['/', '/create', '/search'];
 
 // eslint-disable-next-line max-len
 const NavItemsContainerAuthenticated: React.FC<NavItemsContainerProps> = ({ mobile, clicked }) => {

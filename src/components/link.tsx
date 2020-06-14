@@ -1,6 +1,6 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import { EntireFeedQuery, useMeQuery, useVoteMutationMutation } from '../generated/graphql';
+import { EntireFeedQuery, useMeQuery, useVoteMutationMutation, Link, FeedSearchQuery } from '../generated/graphql';
 
 import timeDifferenceForDate from '../utils/timeDifference';
 
@@ -33,7 +33,7 @@ mutation VoteMutation($linkId: ID!) {
 `;
 
 interface LinkProps {
-    linkData: EntireFeedQuery;
+    linkData: EntireFeedQuery | FeedSearchQuery | null;
 }
 
 const Links: React.FC<LinkProps> = ({ linkData }) => {
@@ -50,7 +50,7 @@ const Links: React.FC<LinkProps> = ({ linkData }) => {
 
   return (
     <div>
-      {linkData.feed.links.map((link, index) => (
+      {linkData?.feed.links.map((link, index) => (
         <li key={link.id}>
           <span>{index + 1}</span>
           { !loading && data && data.me

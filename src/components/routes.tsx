@@ -7,6 +7,7 @@ import SignUp from './auth/signUp';
 import CreateLink from './createLink';
 import NavBar from './navigation/navBar';
 import LinkContainer from './linkContainer';
+import Search from './search';
 
 const Wrapper = styled.div`
 padding: 12rem 2rem 12rem 2rem;
@@ -24,6 +25,7 @@ const Routes: React.FC = () => {
           <Route exact path="/create" component={CreateLink} />
           <Route exact path="/signUp" component={SignUp} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/search" component={Search} />
         </Switch>
       </Wrapper>
     </Router>

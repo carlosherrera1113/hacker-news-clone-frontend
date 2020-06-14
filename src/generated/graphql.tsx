@@ -230,7 +230,7 @@ export type EntireFeedQuery = (
         & Pick<Vote, 'id'>
         & { user?: Maybe<(
           { __typename?: 'User' }
-          & Pick<User, 'id' | 'name'>
+          & Pick<User, 'id'>
         )> }
       )>> }
     )> }
@@ -246,6 +246,33 @@ export type LogoutMutation = (
     { __typename?: 'SuccessMessage' }
     & Pick<SuccessMessage, 'message'>
   )> }
+);
+
+export type FeedSearchQueryVariables = {
+  filter: Scalars['String'];
+};
+
+
+export type FeedSearchQuery = (
+  { __typename?: 'Query' }
+  & { feed: (
+    { __typename?: 'Feed' }
+    & { links: Array<(
+      { __typename?: 'Link' }
+      & Pick<Link, 'id' | 'url' | 'description' | 'createdAt'>
+      & { postedBy?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name'>
+      )>, votes?: Maybe<Array<(
+        { __typename?: 'Vote' }
+        & Pick<Vote, 'id'>
+        & { user?: Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id'>
+        )> }
+      )>> }
+    )> }
+  ) }
 );
 
 
@@ -449,7 +476,6 @@ export const EntireFeedDocument = gql`
         id
         user {
           id
-          name
         }
       }
     }
@@ -513,3 +539,51 @@ export function useLogoutMutation(baseOptions?: ApolloReactHooks.MutationHookOpt
 export type LogoutMutationHookResult = ReturnType<typeof useLogoutMutation>;
 export type LogoutMutationResult = ApolloReactCommon.MutationResult<LogoutMutation>;
 export type LogoutMutationOptions = ApolloReactCommon.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
+export const FeedSearchDocument = gql`
+    query FeedSearch($filter: String!) {
+  feed(filter: $filter) {
+    links {
+      id
+      url
+      description
+      createdAt
+      postedBy {
+        id
+        name
+      }
+      votes {
+        id
+        user {
+          id
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useFeedSearchQuery__
+ *
+ * To run a query within a React component, call `useFeedSearchQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFeedSearchQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFeedSearchQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *   },
+ * });
+ */
+export function useFeedSearchQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<FeedSearchQuery, FeedSearchQueryVariables>) {
+        return ApolloReactHooks.useQuery<FeedSearchQuery, FeedSearchQueryVariables>(FeedSearchDocument, baseOptions);
+      }
+export function useFeedSearchLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<FeedSearchQuery, FeedSearchQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<FeedSearchQuery, FeedSearchQueryVariables>(FeedSearchDocument, baseOptions);
+        }
+export type FeedSearchQueryHookResult = ReturnType<typeof useFeedSearchQuery>;
+export type FeedSearchLazyQueryHookResult = ReturnType<typeof useFeedSearchLazyQuery>;
+export type FeedSearchQueryResult = ApolloReactCommon.QueryResult<FeedSearchQuery, FeedSearchQueryVariables>;

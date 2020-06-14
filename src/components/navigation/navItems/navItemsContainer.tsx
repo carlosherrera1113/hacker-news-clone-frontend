@@ -21,8 +21,8 @@ interface NavItemsContainerProps {
     clicked?: () => void;
 }
 
-const links = ['New Links', 'Sign Up', 'Login'];
-const routes = ['/', '/signUp', '/login'];
+const links = ['New Links', 'Sign Up', 'Login', 'Search'];
+const routes = ['/', '/signUp', '/login', '/search'];
 
 
 // eslint-disable-next-line max-len
