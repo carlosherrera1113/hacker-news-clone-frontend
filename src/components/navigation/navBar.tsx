@@ -38,7 +38,11 @@ const StyledHeader = styled(animated.header)`
   transition: --background 0.2s ease-out;
 `;
 
-const Wrapper = styled.div<any>`
+interface WrapperProps {
+  readonly isMobile: boolean;
+}
+
+const Wrapper = styled.div<WrapperProps>`
   display: flex;
   align-items: center;
   overflow: hidden;

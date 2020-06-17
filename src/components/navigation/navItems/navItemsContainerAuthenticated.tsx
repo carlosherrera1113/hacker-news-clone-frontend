@@ -21,11 +21,11 @@ interface NavItemsContainerProps {
     clicked?: () => void;
 }
 
-const authenticatedLinks = ['New Links', 'Submit Link', 'Search'];
-const authenticatedRoutes = ['/', '/create', '/search'];
-
 // eslint-disable-next-line max-len
 const NavItemsContainerAuthenticated: React.FC<NavItemsContainerProps> = ({ mobile, clicked }) => {
+  const authenticatedLinks = ['New Links', 'Search', 'Submit Link'];
+  const authenticatedRoutes = ['/', '/search', '/create'];
+
   const navItemsTrail = useTrail(authenticatedLinks.length, {
     config: config.stiff,
     delay: 350,

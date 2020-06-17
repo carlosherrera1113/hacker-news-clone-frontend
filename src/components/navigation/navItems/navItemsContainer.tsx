@@ -21,12 +21,12 @@ interface NavItemsContainerProps {
     clicked?: () => void;
 }
 
-const links = ['New Links', 'Sign Up', 'Login', 'Search'];
-const routes = ['/', '/signUp', '/login', '/search'];
-
-
 // eslint-disable-next-line max-len
 const NavItemsContainer: React.FC<NavItemsContainerProps> = ({ mobile, clicked }) => {
+  const links = ['New Links', 'Search', 'Sign Up', 'Login'];
+  const routes = ['/', '/search', '/signUp', '/login'];
+
+
   const navItemsTrail = useTrail(links.length, {
     config: config.stiff,
     delay: 350,
