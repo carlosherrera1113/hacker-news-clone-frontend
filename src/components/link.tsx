@@ -36,8 +36,8 @@ color: grey;
 `;
 
 const StyledButton = styled.button`
-width: 25px;
-height: 20px;
+width: 2.25rem;
+height: 2rem;
 font-family: sans-serif;
 font-size: 1rem;
 color: white;
@@ -49,6 +49,7 @@ justify-content: center;
 cursor: pointer;
 border-style: none;
 margin: 0 auto;
+margin-top: 2rem;
 border-radius: 6.25rem;
 outline: none;
 transition: all 0.2s ease-out;
