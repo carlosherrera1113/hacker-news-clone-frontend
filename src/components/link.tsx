@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import { EntireFeedQuery, useMeQuery, useVoteMutationMutation, FeedSearchQuery } from '../generated/graphql';

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { gql } from 'apollo-boost';
 
-import { useEntireFeedQuery } from '../generated/graphql';
+import { useEntireFeedQuery, EntireFeedDocument, useOnNewLinkaddedSubscription, EntireFeedQuery } from '../generated/graphql';
 import Links from './link';
 import Spinner from './spinner';
 
@@ -44,15 +44,58 @@ query EntireFeed {
   }
 }`;
 
+export const NEW_LINKS_SUBSCRIPTION = gql`
+  subscription onNewLinkadded {
+    newLink {
+      id
+      description
+      createdAt
+      url
+      postedBy {
+        id
+        name
+      }
+      votes {
+        id
+        user {
+          id
+        }
+      }
+    }
+  }
+`;
+
 const LinkContainer: React.FC = () => {
-  const { loading, error, data } = useEntireFeedQuery();
+  const { loading, error, data: queryData, subscribeToMore } = useEntireFeedQuery();
+
+  useOnNewLinkaddedSubscription({
+    onSubscriptionData: ({ client, subscriptionData }) => {
+      const prev = client.readQuery<EntireFeedQuery>({
+        query: EntireFeedDocument,
+      });
+
+      client.writeQuery({
+        query: EntireFeedDocument,
+        data: {
+          ...prev,
+          feed: {
+            links: [subscriptionData.data?.newLink, ...prev!.feed.links],
+            count: prev!.feed.links.length + 1,
+            __typename: prev?.feed.__typename,
+          },
+        },
+      });
+    },
+  });
 
   if (loading) return <Spinner />;
 
-  if (error || !data) return <StyledError>Error</StyledError>;
+  if (error || !queryData) return <StyledError>Error</StyledError>;
 
   return (
-    <Links linkData={data} />
+    <Links
+      linkData={queryData}
+    />
   );
 };
 

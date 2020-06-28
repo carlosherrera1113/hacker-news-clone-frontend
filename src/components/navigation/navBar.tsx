@@ -6,7 +6,7 @@ import DesktopMenu from './desktopMenu';
 import MobileMenu from './mobileMenu/mobileMenu';
 import useMobile from '../../customHooks/useMobile';
 
-const Title = styled.h1`
+const Title = styled.span`
 display: inline;
 margin: 1.5rem;
 color: darkorange;

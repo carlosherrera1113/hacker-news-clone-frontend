@@ -237,6 +237,28 @@ export type EntireFeedQuery = (
   ) }
 );
 
+export type OnNewLinkaddedSubscriptionVariables = {};
+
+
+export type OnNewLinkaddedSubscription = (
+  { __typename?: 'Subscription' }
+  & { newLink: (
+    { __typename?: 'Link' }
+    & Pick<Link, 'id' | 'description' | 'createdAt' | 'url'>
+    & { postedBy?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name'>
+    )>, votes?: Maybe<Array<(
+      { __typename?: 'Vote' }
+      & Pick<Vote, 'id'>
+      & { user?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id'>
+      )> }
+    )>> }
+  ) }
+);
+
 export type LogoutMutationVariables = {};
 
 
@@ -508,6 +530,47 @@ export function useEntireFeedLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryH
 export type EntireFeedQueryHookResult = ReturnType<typeof useEntireFeedQuery>;
 export type EntireFeedLazyQueryHookResult = ReturnType<typeof useEntireFeedLazyQuery>;
 export type EntireFeedQueryResult = ApolloReactCommon.QueryResult<EntireFeedQuery, EntireFeedQueryVariables>;
+export const OnNewLinkaddedDocument = gql`
+    subscription onNewLinkadded {
+  newLink {
+    id
+    description
+    createdAt
+    url
+    postedBy {
+      id
+      name
+    }
+    votes {
+      id
+      user {
+        id
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useOnNewLinkaddedSubscription__
+ *
+ * To run a query within a React component, call `useOnNewLinkaddedSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useOnNewLinkaddedSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOnNewLinkaddedSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useOnNewLinkaddedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnNewLinkaddedSubscription, OnNewLinkaddedSubscriptionVariables>) {
+        return ApolloReactHooks.useSubscription<OnNewLinkaddedSubscription, OnNewLinkaddedSubscriptionVariables>(OnNewLinkaddedDocument, baseOptions);
+      }
+export type OnNewLinkaddedSubscriptionHookResult = ReturnType<typeof useOnNewLinkaddedSubscription>;
+export type OnNewLinkaddedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnNewLinkaddedSubscription>;
 export const LogoutDocument = gql`
     mutation Logout {
   logout {
