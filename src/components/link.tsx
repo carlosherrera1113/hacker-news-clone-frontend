@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
-import { EntireFeedQuery, useMeQuery, useVoteMutationMutation, FeedSearchQuery } from '../generated/graphql';
+import { EntireFeedQuery, useMeQuery, useVoteMutationMutation, FeedSearchQuery, useOnNewVoteSubscription, EntireFeedDocument } from '../generated/graphql';
 
 import timeDifferenceForDate from '../utils/timeDifference';
 import useMobile from '../customHooks/useMobile';
@@ -139,6 +139,33 @@ mutation VoteMutation($linkId: ID!) {
 }
 `;
 
+const NEW_VOTES_SUBSCRIPTION = gql`
+subscription onNewVote {
+  newVote {
+    id
+    link {
+       id
+      url
+      description
+      createdAt
+      postedBy {
+        id
+        name
+      }    
+       votes {
+         id
+        user {
+          id
+         }
+      }
+    }
+    user {
+      id
+    }
+  }
+}
+`;
+
 interface LinkProps {
   linkData: EntireFeedQuery | FeedSearchQuery | null;
 }
@@ -151,6 +178,29 @@ const Links: React.FC<LinkProps> = ({ linkData }) => {
   const { loading, data } = useMeQuery();
   const [voteMutation] = useVoteMutationMutation();
   const isMobile = useMobile();
+  useOnNewVoteSubscription({
+    onSubscriptionData: ({ client, subscriptionData }) => {
+      const prev = client.readQuery<EntireFeedQuery>({
+        query: EntireFeedDocument,
+      });
+
+      client.writeQuery({
+        query: EntireFeedDocument,
+        data: {
+          ...prev,
+          feed: {
+            votes: {
+              id: subscriptionData.data?.newVote.id,
+              user: {
+                id: subscriptionData.data?.newVote.user?.id,
+              },
+            },
+            __typename: prev?.feed.__typename,
+          },
+        },
+      });
+    },
+  });
 
   const handleClick = async (link: any) => {
     await voteMutation({ variables:

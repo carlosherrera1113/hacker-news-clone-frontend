@@ -211,6 +211,35 @@ export type VoteMutationMutation = (
   ) }
 );
 
+export type OnNewVoteSubscriptionVariables = {};
+
+
+export type OnNewVoteSubscription = (
+  { __typename?: 'Subscription' }
+  & { newVote: (
+    { __typename?: 'Vote' }
+    & Pick<Vote, 'id'>
+    & { link?: Maybe<(
+      { __typename?: 'Link' }
+      & Pick<Link, 'id' | 'url' | 'description' | 'createdAt'>
+      & { postedBy?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name'>
+      )>, votes?: Maybe<Array<(
+        { __typename?: 'Vote' }
+        & Pick<Vote, 'id'>
+        & { user?: Maybe<(
+          { __typename?: 'User' }
+          & Pick<User, 'id'>
+        )> }
+      )>> }
+    )>, user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id'>
+    )> }
+  ) }
+);
+
 export type EntireFeedQueryVariables = {};
 
 
@@ -482,6 +511,53 @@ export function useVoteMutationMutation(baseOptions?: ApolloReactHooks.MutationH
 export type VoteMutationMutationHookResult = ReturnType<typeof useVoteMutationMutation>;
 export type VoteMutationMutationResult = ApolloReactCommon.MutationResult<VoteMutationMutation>;
 export type VoteMutationMutationOptions = ApolloReactCommon.BaseMutationOptions<VoteMutationMutation, VoteMutationMutationVariables>;
+export const OnNewVoteDocument = gql`
+    subscription onNewVote {
+  newVote {
+    id
+    link {
+      id
+      url
+      description
+      createdAt
+      postedBy {
+        id
+        name
+      }
+      votes {
+        id
+        user {
+          id
+        }
+      }
+    }
+    user {
+      id
+    }
+  }
+}
+    `;
+
+/**
+ * __useOnNewVoteSubscription__
+ *
+ * To run a query within a React component, call `useOnNewVoteSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useOnNewVoteSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOnNewVoteSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useOnNewVoteSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnNewVoteSubscription, OnNewVoteSubscriptionVariables>) {
+        return ApolloReactHooks.useSubscription<OnNewVoteSubscription, OnNewVoteSubscriptionVariables>(OnNewVoteDocument, baseOptions);
+      }
+export type OnNewVoteSubscriptionHookResult = ReturnType<typeof useOnNewVoteSubscription>;
+export type OnNewVoteSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnNewVoteSubscription>;
 export const EntireFeedDocument = gql`
     query EntireFeed {
   feed {
