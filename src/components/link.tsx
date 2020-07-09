@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import { EntireFeedQuery, useMeQuery, useVoteMutationMutation, FeedSearchQuery, useOnNewVoteSubscription, EntireFeedDocument } from '../generated/graphql';
@@ -139,7 +139,7 @@ mutation VoteMutation($linkId: ID!) {
 }
 `;
 
-const NEW_VOTES_SUBSCRIPTION = gql`
+export const NEW_VOTES_SUBSCRIPTION = gql`
 subscription onNewVote {
   newVote {
     id

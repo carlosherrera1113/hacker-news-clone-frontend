@@ -26,7 +26,6 @@ const NavItemsContainer: React.FC<NavItemsContainerProps> = ({ mobile, clicked }
   const links = ['New Links', 'Search', 'Sign Up', 'Login'];
   const routes = ['/', '/search', '/signUp', '/login'];
 
-
   const navItemsTrail = useTrail(links.length, {
     config: config.stiff,
     delay: 350,

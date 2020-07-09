@@ -240,7 +240,11 @@ export type OnNewVoteSubscription = (
   ) }
 );
 
-export type EntireFeedQueryVariables = {};
+export type EntireFeedQueryVariables = {
+  first?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<LinkOrderByInput>;
+};
 
 
 export type EntireFeedQuery = (
@@ -559,8 +563,8 @@ export function useOnNewVoteSubscription(baseOptions?: ApolloReactHooks.Subscrip
 export type OnNewVoteSubscriptionHookResult = ReturnType<typeof useOnNewVoteSubscription>;
 export type OnNewVoteSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnNewVoteSubscription>;
 export const EntireFeedDocument = gql`
-    query EntireFeed {
-  feed {
+    query EntireFeed($first: Int, $skip: Int, $orderBy: LinkOrderByInput) {
+  feed(first: $first, skip: $skip, orderBy: $orderBy) {
     links {
       id
       description
@@ -594,6 +598,9 @@ export const EntireFeedDocument = gql`
  * @example
  * const { data, loading, error } = useEntireFeedQuery({
  *   variables: {
+ *      first: // value for 'first'
+ *      skip: // value for 'skip'
+ *      orderBy: // value for 'orderBy'
  *   },
  * });
  */

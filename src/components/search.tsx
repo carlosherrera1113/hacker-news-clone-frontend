@@ -76,6 +76,7 @@ width: 100%;
 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 border-radius: 2rem;
 margin: 0 auto;
+margin-bottom: 5rem;
 background-color: ${({ theme }) => theme.colors.secondary};
 `;
 

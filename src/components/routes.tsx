@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Login from './auth/login';
@@ -21,7 +21,9 @@ const Routes: React.FC = () => {
       <NavBar />
       <Wrapper>
         <Switch>
-          <Route exact path="/" component={LinkContainer} />
+          <Route exact path="/" render={() => <Redirect to="/new/1" />} />
+          <Route exact path="/top" component={LinkContainer} />
+          <Route exact path="/new/:page" component={LinkContainer} />
           <Route exact path="/create" component={CreateLink} />
           <Route exact path="/signUp" component={SignUp} />
           <Route exact path="/login" component={Login} />
