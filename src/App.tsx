@@ -7,7 +7,7 @@ const App: React.FC = () => {
   // This allows the global variable 'accessToken' to be refreshed when the user refreshes
   // the page after login
   useEffect(() => {
-    fetch('http://localhost:4000/refresh_token', {
+    fetch('https://hacker-news-clone-server.herokuapp.com/refresh_token', {
       method: 'POST',
       credentials: 'include',
     }).then(async (x) => {

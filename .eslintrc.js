@@ -20,6 +20,8 @@ module.exports = {
         'no-redeclare': 0,
         'no-undef': 0,
         'no-unused-vars': 0,
+        'no-restricted-globals': 0,
+        'no-confusing-arrow': 0,
         '@typescript-eslint/camelcase': 0,
         '@typescript-eslint/no-explicit-any': 0,
         '@typescript-eslint/explicit-function-return-type': 0,

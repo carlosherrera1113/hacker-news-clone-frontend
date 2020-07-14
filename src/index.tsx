@@ -20,14 +20,14 @@ import App from './App';
 const cache = new InMemoryCache({});
 
 const wsLink = new WebSocketLink({
-  uri: 'ws://localhost:4000/graphql',
+  uri: 'wss://hacker-news-clone-server.herokuapp.com/graphql',
   options: {
     reconnect: true,
   },
 });
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: 'https://hacker-news-clone-server.herokuapp.com/graphql',
   credentials: 'include',
 });
 
@@ -80,7 +80,7 @@ const tokenRefreshLink = new TokenRefreshLink({
     }
   },
   fetchAccessToken: () => {
-    return fetch('http://localhost:4000/refresh_token', {
+    return fetch('https://hacker-news-clone-server.herokuapp.com/refresh_token', {
       method: 'POST',
       credentials: 'include',
     });

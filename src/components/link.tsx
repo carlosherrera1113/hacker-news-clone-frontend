@@ -5,6 +5,7 @@ import { EntireFeedQuery, useMeQuery, useVoteMutationMutation, FeedSearchQuery, 
 
 import timeDifferenceForDate from '../utils/timeDifference';
 import useMobile from '../customHooks/useMobile';
+import useQueryVariables from '../utils/getQueryVariables';
 
 const Container = styled.div`
 display: flex;
@@ -178,10 +179,14 @@ const Links: React.FC<LinkProps> = ({ linkData }) => {
   const { loading, data } = useMeQuery();
   const [voteMutation] = useVoteMutationMutation();
   const isMobile = useMobile();
+  const { first, skip, orderBy } = useQueryVariables();
   useOnNewVoteSubscription({
     onSubscriptionData: ({ client, subscriptionData }) => {
       const prev = client.readQuery<EntireFeedQuery>({
         query: EntireFeedDocument,
+        variables: {
+          first, skip, orderBy,
+        },
       });
 
       client.writeQuery({
