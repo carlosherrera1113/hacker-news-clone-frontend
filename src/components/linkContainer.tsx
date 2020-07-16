@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { gql } from 'apollo-boost';
-import { useLocation, useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
-import { useEntireFeedQuery, EntireFeedDocument, useOnNewLinkaddedSubscription, EntireFeedQuery, LinkOrderByInput } from '../generated/graphql';
+import { useEntireFeedQuery, EntireFeedQuery, OnNewLinkaddedDocument } from '../generated/graphql';
 import Links from './link';
 import Spinner from './spinner';
+import getQueryVariables from '../utils/getQueryVariables';
 
 const StyledError = styled.div`
 display: flex;
@@ -95,22 +96,10 @@ export const NEW_LINKS_SUBSCRIPTION = gql`
 `;
 
 const LinkContainer: React.FC = () => {
-  const { pathname } = useLocation();
   const { page } = useParams();
   const history = useHistory();
 
-  const getQueryVariables = () => {
-    const skip = pathname.includes('new') ? (parseInt(page, 10) - 1) * 10 : 0;
-    const first = pathname.includes('new') ? 10 : 50;
-    const orderBy = pathname.includes('new') ? 'createdAt_DESC' as LinkOrderByInput.CreatedAtDesc : null;
-    return {
-      first,
-      skip,
-      orderBy,
-    };
-  };
-
-  const { loading, error, data: queryData } = useEntireFeedQuery({
+  const { loading, error, data: queryData, subscribeToMore } = useEntireFeedQuery({
     variables: {
       ...getQueryVariables(),
     },
@@ -130,26 +119,6 @@ const LinkContainer: React.FC = () => {
     }
   };
 
-  useOnNewLinkaddedSubscription({
-    onSubscriptionData: ({ client, subscriptionData }) => {
-      const prev = client.readQuery<EntireFeedQuery>({
-        query: EntireFeedDocument,
-      });
-
-      client.writeQuery({
-        query: EntireFeedDocument,
-        data: {
-          ...prev,
-          feed: {
-            links: [subscriptionData.data?.newLink, ...prev!.feed.links],
-            count: prev!.feed.links.length + 1,
-            __typename: prev?.feed.__typename,
-          },
-        },
-      });
-    },
-  });
-
   if (loading) return <Spinner />;
 
   if (error || !queryData) return <StyledError>Error</StyledError>;
@@ -158,6 +127,24 @@ const LinkContainer: React.FC = () => {
     <>
       <Links
         linkData={queryData}
+        subscribeToNewComments={() => subscribeToMore({
+          document: OnNewLinkaddedDocument,
+          updateQuery: (prev: any, { subscriptionData }: any) => {
+            if (!subscriptionData.data) return prev;
+            const { newLink } = subscriptionData.data;
+            const exists = prev.feed.links.find(({ id }: any) => id === newLink.id);
+            if (exists) return prev;
+            // eslint-disable-next-line prefer-object-spread
+            return Object.assign({}, prev, {
+              feed: {
+                links: [newLink, ...prev.feed.links],
+                count: prev.feed.links.length + 1,
+                // eslint-disable-next-line no-underscore-dangle
+                __typename: prev.feed.__typename,
+              },
+            });
+          },
+        })}
       />
       <StyledButton type="button" onClick={previousPage}>back</StyledButton>
       <StyledButton type="button" onClick={() => nextPage(queryData)}>forward</StyledButton>

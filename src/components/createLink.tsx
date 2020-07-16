@@ -102,8 +102,9 @@ const CreateLink: React.FC = () => {
         url,
       },
       update: (cache, { data }) => {
-        const query = cache.readQuery<EntireFeedQuery>({ query: EntireFeedDocument });
-
+        const query = cache.readQuery<EntireFeedQuery>({
+          query: EntireFeedDocument,
+        });
         // eslint-disable-next-line no-unused-expressions
         query!.feed.links.unshift(data!.post);
 

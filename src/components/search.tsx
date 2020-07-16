@@ -128,7 +128,10 @@ const Search: React.FC = () => {
           <StyledButton type="button" onClick={handleClick}>Ok</StyledButton>
         </StyledForm>
       </FormWrapper>
-      <Links linkData={data} />
+      <Links
+        linkData={data}
+        subscribeToNewComments={() => () => null}
+      />
     </div>
   );
 };

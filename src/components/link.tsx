@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
-import { EntireFeedQuery, useMeQuery, useVoteMutationMutation, FeedSearchQuery, useOnNewVoteSubscription, EntireFeedDocument } from '../generated/graphql';
+import { EntireFeedQuery, useMeQuery, useVoteMutationMutation, FeedSearchQuery } from '../generated/graphql';
 
 import timeDifferenceForDate from '../utils/timeDifference';
 import useMobile from '../customHooks/useMobile';
-import useQueryVariables from '../utils/getQueryVariables';
 
 const Container = styled.div`
 display: flex;
@@ -66,6 +65,7 @@ transition: all 0.2s ease-out;
 
 const StyledList = styled.ul`
 display: inline-block;
+width: 60rem;
 `;
 
 const StyledLink = styled.div<StyledLinkAndUrlProps>`
@@ -169,42 +169,20 @@ subscription onNewVote {
 
 interface LinkProps {
   linkData: EntireFeedQuery | FeedSearchQuery | null;
+  subscribeToNewComments: () => () => void;
 }
 
 interface StyledLinkAndUrlProps {
   readonly isMobile: boolean;
 }
 
-const Links: React.FC<LinkProps> = ({ linkData }) => {
+const Links: React.FC<LinkProps> = ({ linkData, subscribeToNewComments }) => {
   const { loading, data } = useMeQuery();
   const [voteMutation] = useVoteMutationMutation();
   const isMobile = useMobile();
-  const { first, skip, orderBy } = useQueryVariables();
-  useOnNewVoteSubscription({
-    onSubscriptionData: ({ client, subscriptionData }) => {
-      const prev = client.readQuery<EntireFeedQuery>({
-        query: EntireFeedDocument,
-        variables: {
-          first, skip, orderBy,
-        },
-      });
 
-      client.writeQuery({
-        query: EntireFeedDocument,
-        data: {
-          ...prev,
-          feed: {
-            votes: {
-              id: subscriptionData.data?.newVote.id,
-              user: {
-                id: subscriptionData.data?.newVote.user?.id,
-              },
-            },
-            __typename: prev?.feed.__typename,
-          },
-        },
-      });
-    },
+  useEffect(() => {
+    subscribeToNewComments();
   });
 
   const handleClick = async (link: any) => {
@@ -219,6 +197,7 @@ const Links: React.FC<LinkProps> = ({ linkData }) => {
     <Container>
       {linkData?.feed.links.map((link, index) => (
         <ListWrapper key={link.id}>
+          {console.log(link.id)}
           <SpanButtonWrapper>
             <StyledSpan>{index + 1}.</StyledSpan>
             { !loading && data && data.me

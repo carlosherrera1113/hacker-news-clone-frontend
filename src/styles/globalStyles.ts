@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
 html {
     font-size: 62.5%;
     box-sizing: border-box;
+    overflow-x: hidden;
     @media ${({ theme }) => theme.mediaQueries.largest} {
         font-size: 60%;
     }
@@ -27,6 +28,7 @@ body {
     margin: 0;
     width: 100%;
     overflow: auto;
+    overflow-x: hidden;
 }
 `;
 
