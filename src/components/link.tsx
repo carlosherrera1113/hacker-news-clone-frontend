@@ -197,7 +197,6 @@ const Links: React.FC<LinkProps> = ({ linkData, subscribeToNewComments }) => {
     <Container>
       {linkData?.feed.links.map((link, index) => (
         <ListWrapper key={link.id}>
-          {console.log(link.id)}
           <SpanButtonWrapper>
             <StyledSpan>{index + 1}.</StyledSpan>
             { !loading && data && data.me
